@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ホーム - Kotan</title>
+</head>
+<body>
+    <h1>Kotan ホーム / Room</h1>
+    <!-- 担当者: B -->
+    <!-- 目的: ルートディレクトリ兼room用ページのUI実装 -->
+    <!-- 補足: ユーザーの部屋の状態を表現するメイン画面となるため、他のページへのナビゲーションも整備してください。 -->
+    
+    <ul>
+        <li><a th:href="@{/register}">登録画面</a></li>
+        <li><a th:href="@{/login}">ログイン画面</a></li>
+        <li><a th:href="@{/account}">アカウント情報</a></li>
+        <li><a th:href="@{/garden}">Garden</a></li>
+        <li><a th:href="@{/aquarium}">Aquarium</a></li>
+        <li><a th:href="@{/farm}">Farm</a></li>
+        <li><a th:href="@{/products}">商品一覧</a></li>
+    </ul>
+</body>
+</html>
