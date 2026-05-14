@@ -22,6 +22,13 @@
             <div class="sidebar-header">
                 <div class="close-menu" id="close-btn">&times;</div>
             </div>
+            
+            <!-- ユーザー情報表示 -->
+            <div class="user-info">
+                <span class="user-greeting" th:text="'ようこそ' + (${username} ?: 'ゲスト') + 'さん'">ようこそゲストさん</span>
+                <a th:href="@{/account}" class="account-link" title="アカウント情報">⚪</a>
+            </div>
+
             <nav class="sidebar-content">
                 <ul>
                     <li><a th:href="@{/account}">アカウント情報</a></li>
@@ -44,10 +51,12 @@
                 const closeBtn = document.getElementById('close-btn');
                 const sidebar = document.getElementById('sidebar-menu');
                 const overlay = document.getElementById('menu-overlay');
+                const body = document.body;
 
                 function toggleMenu() {
                     sidebar.classList.toggle('active');
                     overlay.classList.toggle('active');
+                    body.classList.toggle('sidebar-open');
                 }
 
                 hamburgerBtn.addEventListener('click', toggleMenu);

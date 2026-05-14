@@ -9,6 +9,12 @@ body {
     background-color: #f4f4f4;
     color: #333;
     line-height: 1.6;
+    transition: margin-left 0.3s ease;
+}
+
+body.sidebar-open {
+    margin-left: 300px;
+    overflow: hidden; /* サイドバーが開いている間はスクロール抑制 */
 }
 
 /* ===== メインコンテナ ===== */
@@ -213,6 +219,61 @@ header {
 
 .overlay.active {
     display: block;
+}
+
+/* ユーザー情報表示 (サイドバー内) */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.user-greeting {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.account-link {
+    font-size: 24px;
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.account-link:hover {
+    transform: scale(1.1);
+}
+
+/* プレイエリアボタン (インライン表示用) */
+.play-area-nav {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.play-area-btn {
+    padding: 10px 20px;
+    background-color: white;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: all 0.2s;
+    flex: 1;
+    text-align: center;
+    min-width: 120px;
+}
+
+.play-area-btn:hover {
+    background-color: #d9ecfb;
+    border-color: #b0d4f1;
 }
 
 /* ===== フッター ===== */
