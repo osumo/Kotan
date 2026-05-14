@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ホーム - KOTAN</title>
     <link rel="stylesheet" th:href="@{/css/common.css}">
 </head>
+
 <body>
     <!-- ヘッダーの挿入 -->
     <div th:replace="~{layout/_header :: header}"></div>
@@ -16,19 +18,15 @@
 
         <h1 class="title">KOTAN</h1>
         <p class="sub-title">あなたの毎日を彩る、最高の体験を。</p>
-        
+
         <div style="text-align: center; margin-top: 40px;">
             <h2>Room へようこそ</h2>
             <p>ここではあなたの好みに合わせた部屋をカスタマイズできます。</p>
-        </div>
-
-        <div style="margin-top: 50px; background: white; padding: 40px; box-shadow: 0 2px 20px rgba(0,0,0,0.05); border-radius: 12px; text-align: center;">
-            <p>メインコンテンツがここに表示されます。</p>
-            <p>サイドメニューを開くと、このエリアが右にずれます。</p>
         </div>
     </main>
 
     <!-- フッターの挿入 -->
     <div th:replace="~{layout/_footer :: footer}"></div>
 </body>
+
 </html>
