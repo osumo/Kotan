@@ -22,7 +22,7 @@ body.sidebar-open {
     width: 100%;
     max-width: 1200px;
     margin: 60px auto;
-    padding: 0 20px;
+    padding: 0 20px 0 160px; /* 左側にボタン用のスペース(140px + α)を確保 */
     min-height: calc(100vh - 300px); /* フッターを下に押しやるため */
 }
 
@@ -249,16 +249,25 @@ header {
     transform: scale(1.1);
 }
 
-/* プレイエリアボタン (インライン表示用) */
+/* プレイエリアボタン (左側に縦に並べる) */
 .play-area-nav {
     display: flex;
-    gap: 15px;
-    margin-bottom: 30px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 10px;
+    position: fixed;
+    left: 20px;
+    top: 100px;
+    z-index: 500;
+    width: 120px;
+    transition: left 0.3s ease;
+}
+
+body.sidebar-open .play-area-nav {
+    left: 320px; /* サイドバー(300px) + 余白(20px) */
 }
 
 .play-area-btn {
-    padding: 10px 20px;
+    padding: 12px 10px;
     background-color: white;
     border: 1px solid #ddd;
     text-decoration: none;
@@ -266,9 +275,8 @@ header {
     font-weight: bold;
     border-radius: 4px;
     transition: all 0.2s;
-    flex: 1;
     text-align: center;
-    min-width: 120px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .play-area-btn:hover {
