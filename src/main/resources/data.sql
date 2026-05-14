@@ -1,46 +1,85 @@
--- data.sql
--- Kotan プロジェクト 初期データ投入 (DML)
+-- Kotan Test Data
 
--- 1. カテゴリ
-INSERT INTO categories (name) VALUES ('農産物'), ('水産物'), ('畜産物'), ('その他');
+-- 1. users
+INSERT INTO users (email, password, display_name, total_spent, converted_spent) VALUES
+('test@example.com', '$2a$10$vW9mYh4wF.S.mU.zUuGv.e', 'テストユーザー', 5000, 3000),
+('user2@example.com', '$2a$10$vW9mYh4wF.S.mU.zUuGv.e', 'サトシ', 12000, 10000);
 
--- 2. 商品・アイテムマスタ
--- 農産物 (購入すると種が付与される)
-INSERT INTO products (category_id, name, description, price, item_type, growth_days, stock) 
-VALUES (1, '夕張メロン', '北海道が誇る高級メロンです。', 5000, 'FOOD', 7, 100);
-INSERT INTO products (category_id, name, description, price, item_type, growth_days, stock) 
-VALUES (1, '十勝じゃがいも', 'ホクホクとした食感が特徴です。', 500, 'FOOD', 3, 500);
+-- 2. categories
+INSERT INTO categories (name) VALUES
+('農産物'),
+('水産物'),
+('畜産物'),
+('その他');
 
--- 水産物 (重さがある対象)
-INSERT INTO products (category_id, name, description, price, item_type, weight, stock) 
-VALUES (2, '天然秋鮭', '脂の乗った旬の鮭です。', 3000, 'FISH', 3.5, 200);
+-- 3. coupons
+INSERT INTO coupons (code, name, discount_rate, min_amount) VALUES
+('WELCOME10', 'ウェルカムクーポン', 10, 1000),
+('BIRTHDAY20', 'お誕生日クーポン', 20, 0),
+('SPECIAL500', '特別割引クーポン', 5, 5000);
 
--- その他 (ガチャコイン・報酬家具など)
-INSERT INTO products (category_id, name, description, price, item_type, stock) 
-VALUES (4, 'ガチャコイン', 'Farmで交換できるガチャ専用コインです。', 0, 'COIN', 9999);
-INSERT INTO products (category_id, name, description, price, item_type, stock) 
-VALUES (4, 'アイヌ文様のラグ', '【実績報酬】伝統的な文様のラグです。', 0, 'FURNITURE', 0);
-INSERT INTO products (category_id, name, description, price, item_type, stock) 
-VALUES (4, '木彫りの熊', '【実績報酬】北海道の定番置物です。', 0, 'FURNITURE', 0);
+-- 4. user_coupons
+INSERT INTO user_coupons (user_id, coupon_id, expire_at) VALUES
+(1, 1, '2026-12-31 23:59:59'),
+(1, 3, '2026-06-30 23:59:59'),
+(2, 2, '2026-12-31 23:59:59');
 
--- 3. 実績マスタ (報酬アイテムと紐付け)
-INSERT INTO achievements (title, description, reward_product_id) 
-VALUES ('初めての注文', 'ECサイトで初めて商品を購入した', 5); -- ラグ
-INSERT INTO achievements (title, description, reward_product_id) 
-VALUES ('ベテラン農家', 'Gardenで植物を10回育てた', 6); -- 木彫りの熊
+-- 5. products (EC商品は在庫あり、アイテムは在庫0または管理外)
+INSERT INTO products (category_id, name, description, price, item_type, stock, growth_days, weight) VALUES
+-- 農産物
+(1, '北海道産じゃがいも 5kg', 'ホクホクでおいしいじゃがいもです。', 2500, 'FOOD', 100, 0, 0),
+(1, 'じゃがいもの種', '庭に植えるとじゃがいもが育ちます。', 500, 'PLANT', 0, 7, 0),
+-- 水産物
+(2, '特選毛ガニ', '身がぎっしり詰まった毛ガニです。', 8000, 'FOOD', 50, 0, 0),
+(2, 'サケ（稚魚）', 'アクアリウムで育てるサケの稚魚です。', 1000, 'FISH', 0, 0, 1.5),
+-- 畜産物
+(3, '十勝和牛 ステーキ用', 'とろけるような食感の和牛です。', 12000, 'FOOD', 30, 0, 0),
+-- その他・家具
+(4, '木製の机', 'シンプルで使いやすい家具です。', 5000, 'FURNITURE', 0, 0, 0),
+(4, '雪だるまの置物', '冬にぴったりの可愛い置物です。', 2000, 'FURNITURE', 0, 0, 0),
+(4, 'ガチャコイン', 'メタバース内でガチャが回せます。', 0, 'OTHER', 0, 0, 0);
 
--- 4. クーポン
-INSERT INTO coupons (code, name, discount_rate, min_amount) 
-VALUES ('WELCOME10', '初回限定10%OFFクーポン', 10, 0);
+-- 6. inventory
+INSERT INTO inventory (user_id, product_id, quantity) VALUES
+(1, 2, 5), -- テストユーザーがじゃがいもの種を5個所持
+(1, 6, 1), -- テストユーザーが机を1個所持
+(1, 8, 10), -- テストユーザーがガチャコインを10個所持
+(2, 4, 3); -- サトシがサケの稚魚を3匹所持
 
--- 5. テストユーザー
-INSERT INTO users (email, password, display_name, total_spent) 
-VALUES ('test@example.com', 'password', 'テストユーザー', 15000);
+-- 7. room_placements
+INSERT INTO room_placements (user_id, product_id, pos_x, pos_y) VALUES
+(1, 6, 10.5, 5.2);
 
--- 6. ユーザー所持アイテム
-INSERT INTO inventory (user_id, product_id, quantity) VALUES (1, 1, 2); -- メロン
-INSERT INTO inventory (user_id, product_id, quantity) VALUES (1, 4, 10); -- ガチャコイン
+-- 8. garden_states
+INSERT INTO garden_states (user_id, slot_index, product_id, planted_at) VALUES
+(1, 0, 2, NOW() - INTERVAL '3 days');
 
--- 7. アクアリウムイベント
-INSERT INTO aquarium_events (title, target_weight, current_weight, end_at) 
-VALUES ('鮭を100kg集めよう！', 100.0, 15.5, '2026-12-31 23:59:59');
+-- 9. aquarium_events
+INSERT INTO aquarium_events (title, target_weight, current_weight, end_at) VALUES
+('春のサケ祭り', 100.0, 45.5, '2026-05-31 23:59:59');
+
+-- 10. achievements
+INSERT INTO achievements (title, description, reward_product_id) VALUES
+('最初の一歩', '初めてログインする', 8),
+('庭師の卵', '初めて種を植える', 6),
+('爆買い王', '累計購入金額が10,000円を突破', 7);
+
+-- 11. user_achievements
+INSERT INTO user_achievements (user_id, achievement_id) VALUES
+(1, 1),
+(2, 1),
+(2, 3);
+
+-- 12. orders
+INSERT INTO orders (user_id, total_price) VALUES
+(1, 2250), -- 2500円のじゃがいもに10%クーポン適用
+(2, 12000);
+
+-- 13. applied_coupons
+INSERT INTO applied_coupons (order_id, user_coupon_id) VALUES
+(1, 1);
+
+-- 14. order_items
+INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase) VALUES
+(1, 1, 1, 2500),
+(2, 5, 1, 12000);
