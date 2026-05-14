@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
 </head>
+
 <body>
     <!-- フッターフラグメント -->
     <footer th:fragment="footer">
@@ -11,9 +13,9 @@
                 <span class="footer-logo">KOTAN</span>
                 <p>あなたの毎日を彩る、<br>最高の体験を。</p>
             </div>
-            
+
             <div class="footer-section">
-                <h3>Shopping</h3>
+                <h3>ショッピング</h3>
                 <ul>
                     <li><a th:href="@{/products}">商品一覧</a></li>
                     <li><a th:href="@{/cart}">カート</a></li>
@@ -22,7 +24,7 @@
             </div>
 
             <div class="footer-section">
-                <h3>Play Area</h3>
+                <h3>プレイエリア</h3>
                 <ul>
                     <li><a th:href="@{/}">ROOM</a></li>
                     <li><a th:href="@{/garden}">GARDEN</a></li>
@@ -32,18 +34,17 @@
             </div>
 
             <div class="footer-section">
-                <h3>Support</h3>
+                <h3>サポート</h3>
                 <ul>
                     <li><a th:href="@{/account}">アカウント情報</a></li>
-                    <li><a href="#">よくある質問</a></li>
-                    <li><a href="#">お問い合わせ</a></li>
                 </ul>
             </div>
         </div>
 
         <div class="footer-bottom">
-            &copy; 2026 KOTAN Project. All rights reserved.
+            &copy; 2026 Team NaritaBus. All rights reserved.
         </div>
     </footer>
 </body>
+
 </html>
