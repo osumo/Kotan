@@ -1,15 +1,89 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>商品一覧 - Kotan</title>
-</head>
-<body>
-    <h1>商品一覧</h1>
-    <!-- 担当者: D -->
-    <!-- 目的: データベースから取得した商品のリスト表示 -->
-    <!-- 補足: Controllerから渡された商品のリストをth:eachでループさせ、一覧としてきれいに表示してください。 -->
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>商品一覧 - Kotan</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <h1>商品一覧</h1>-->
+<!--     担当者: D -->
+<!--     目的: データベースから取得した商品のリスト表示 -->
+<!--     補足: Controllerから渡された商品のリストをth:eachでループさせ、一覧としてきれいに表示してください。 -->
     
-    <a th:href="@{/}">ホームへ戻る</a>
-</body>
+<!--    <a th:href="@{/}">ホームへ戻る</a>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+        <div class="product-card">
+          <a href="product2.html" class="product-link">
+            <img src="images/purin.jpg" alt="ワインプリン" />
+            <h2>ワインプリン</h2>
+            <p>¥500</p>
+          </a>
+
+          <button class="favorite-btn">
+            <i class="fa-regular fa-heart"></i>
+          </button>
+        </div>
+
+        <!-- 商品カード3 -->
+        <div class="product-card">
+          <a href="product3.html" class="product-link">
+            <img src="images/purin.jpg" alt="ワインプリン" />
+            <h2>ワインプリン</h2>
+            <p>¥500</p>
+          </a>
+
+          <button class="favorite-btn">
+            <i class="fa-regular fa-heart"></i>
+          </button>
+        </div>
+
+        <!-- 商品カード4 -->
+        <div class="product-card">
+          <a href="product4.html" class="product-link">
+            <img src="images/purin.jpg" alt="ワインプリン" />
+            <h2>ワインプリン</h2>
+            <p>¥500</p>
+          </a>
+
+          <button class="favorite-btn">
+            <i class="fa-regular fa-heart"></i>
+          </button>
+        </div>
+
+        <!-- 商品カード5 -->
+        <div class="product-card">
+          <a href="product5.html" class="product-link">
+            <img src="images/purin.jpg" alt="ワインプリン" />
+            <h2>ワインプリン</h2>
+            <p>¥500</p>
+          </a>
+
+          <button class="favorite-btn">
+            <i class="fa-regular fa-heart"></i>
+          </button>
+        </div>
+
+        <!-- 商品カード6 -->
+        <div class="product-card">
+          <a href="product6.html" class="product-link">
+            <img src="images/purin.jpg" alt="ワインプリン" />
+            <h2>ワインプリン</h2>
+            <p>¥500</p>
+          </a>
+
+          <button class="favorite-btn">
+            <i class="fa-regular fa-heart"></i>
+          </button>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- カートボタン -->
+    <a href="cart.html" class="cart-btn">
+      <i class="fa-solid fa-cart-shopping"></i>
+    </a>
 </html>
