@@ -61,7 +61,6 @@ erDiagram
         int id PK
         int user_id FK
         int coupon_id FK
-        boolean is_used
     }
 
     order_items {
@@ -87,7 +86,7 @@ erDiagram
 | `orders` | `applied_coupons` | 1つの注文に複数のクーポンを適用できます。 |
 | `coupons` | `user_coupons` | 1つのクーポン種別は複数のユーザーに配布されます。 |
 | `achievements` | `user_achievements` | 1つの実績項目は複数のユーザーによって達成されます。 |
-| `user_coupons` | `applied_coupons` | 1つの所持クーポンは特定の注文に適用されます。 |
+| `user_coupons` | `applied_coupons` | 1つの所持クーポンは特定の注文に適用されます。※使用済み判定は、このテーブルにレコードが存在するかどうかで行います。 |
 
 ### 2. 多対多 (N:M)
 中間テーブル（Junction Table）を介して、両方のテーブルが互いに複数のレコードと紐づく形式です。
