@@ -14,6 +14,7 @@ erDiagram
     users ||--o{ inventory : "owns"
     users ||--o{ room_placements : "arranges"
     users ||--o{ garden_states : "plants"
+    users ||--o{ user_achievements : "earns"
     coupons ||--o{ user_coupons : "assigned_to"
     orders ||--o{ order_items : "contains"
     orders ||--o{ applied_coupons : "applies"
@@ -26,6 +27,7 @@ erDiagram
     products |o--o{ achievements : "reward_for"
 
     categories ||--o{ products : "classifies"
+    achievements ||--o{ user_achievements : "completed_by"
 
     users {
         int id PK
@@ -84,6 +86,7 @@ erDiagram
 | `orders` | `order_items` | 1つの注文には複数の商品明細が含まれます。 |
 | `orders` | `applied_coupons` | 1つの注文に複数のクーポンを適用できます。 |
 | `coupons` | `user_coupons` | 1つのクーポン種別は複数のユーザーに配布されます。 |
+| `achievements` | `user_achievements` | 1つの実績項目は複数のユーザーによって達成されます。 |
 | `user_coupons` | `applied_coupons` | 1つの所持クーポンは特定の注文に適用されます。 |
 
 ### 2. 多対多 (N:M)
@@ -95,5 +98,6 @@ erDiagram
 | `users` | `products` | `room_placements` | ユーザーは複数の家具を配置し、家具は複数のユーザーの部屋に配置されます。 |
 | `users` | `products` | `garden_states` | ユーザーは複数の種を植え、種は複数のユーザーの庭で成長します。 |
 | `users` | `coupons` | `user_coupons` | ユーザーは複数のクーポンを持ち、クーポンは複数のユーザーに保持されます。 |
+| `users` | `achievements` | `user_achievements` | ユーザーは複数の実績を達成し、実績は複数のユーザーに達成されます。 |
 | `orders` | `products` | `order_items` | 1つの注文に複数の商品が入り、1つの商品は複数の注文に含まれます。 |
 | `orders` | `user_coupons` | `applied_coupons` | 1つの注文に複数の所持クーポンが使われ、1つの所持クーポンは複数の注文に使われる（分割利用等想定）。 |
