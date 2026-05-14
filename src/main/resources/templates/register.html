@@ -1,15 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>登録画面 - Kotan</title>
+    <title>ユーザー登録</title>
 </head>
 <body>
-    <h1>ユーザー登録</h1>
-    <!-- 担当者: A -->
-    <!-- 目的: ユーザーの新規登録フォームの実装 -->
-    <!-- 補足: Bootstrapなどを利用してデザインを整え、フォームの送信先をControllerのPOSTメソッドに合わせてください。 -->
-    
-    <a th:href="@{/}">ホームへ戻る</a>
+
+<h1>ユーザー登録</h1>
+
+<form th:action="@{/register}" th:object="${registerForm}" method="post">
+
+    <div>
+        名前:
+        <input type="text" th:field="*{displayName}">
+        <p th:errors="*{displayName}"></p>
+    </div>
+
+    <div>
+        Email:
+        <input type="email" th:field="*{email}">
+        <p th:errors="*{email}"></p>
+    </div>
+
+    <div>
+        Password:
+        <input type="password" th:field="*{password}">
+        <p th:errors="*{password}"></p>
+    </div>
+
+    <button type="submit">登録</button>
+
+</form>
+
+<a th:href="@{/login}">ログインへ</a>
+
 </body>
 </html>

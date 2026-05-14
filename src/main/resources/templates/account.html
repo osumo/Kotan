@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>アカウント情報 - Kotan</title>
+    <title>アカウント</title>
 </head>
 <body>
-    <h1>アカウント情報</h1>
-    <!-- 担当者: B -->
-    <!-- 目的: ログインユーザーの情報を表示・編集する画面の実装 -->
-    <!-- 補足: Controllerから渡されたユーザー情報をth:textなどで表示し、見やすいレイアウトを組んでください。 -->
-    
-    <a th:href="@{/}">ホームへ戻る</a>
+
+<h1>アカウント情報</h1>
+
+<p>ID: <span th:text="${user.id}"></span></p>
+<p>名前: <span th:text="${user.displayName}"></span></p>
+<p>Email: <span th:text="${user.email}"></span></p>
+
+<a th:href="@{/logout}">ログアウト</a>
+
 </body>
 </html>
