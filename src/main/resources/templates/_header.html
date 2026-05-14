@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <!-- ヘッダーフラグメント -->
+    <header th:fragment="header">
+        <div class="left-header">
+            <div class="menu" id="hamburger-btn">☰</div>
+            <a th:href="@{/}" class="logo">KOTAN</a>
+        </div>
+
+        <div class="right-header">
+            <input type="text" placeholder="Search" class="search-box">
+            <div class="icon">⚪</div>
+        </div>
+
+        <!-- サイドバーメニュー -->
+        <div class="overlay" id="menu-overlay"></div>
+        <div class="sidebar" id="sidebar-menu">
+            <div class="sidebar-header">
+                <div class="close-menu" id="close-btn">&times;</div>
+            </div>
+            <nav class="sidebar-content">
+                <ul>
+                    <li><a th:href="@{/account}">アカウント情報</a></li>
+                    <li><a th:href="@{/products}">商品一覧</a></li>
+                    <li><a th:href="@{/cart}">カート</a></li>
+                    <li><a th:href="@{/favorites}">お気に入り</a></li>
+                    
+                    <div class="category-title">プレイエリア</div>
+                    <li class="sub-menu"><a th:href="@{/}">ROOM</a></li>
+                    <li class="sub-menu"><a th:href="@{/garden}">GARDEN</a></li>
+                    <li class="sub-menu"><a th:href="@{/aquarium}">AQUARIUM</a></li>
+                    <li class="sub-menu"><a th:href="@{/farm}">FARM</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const hamburgerBtn = document.getElementById('hamburger-btn');
+                const closeBtn = document.getElementById('close-btn');
+                const sidebar = document.getElementById('sidebar-menu');
+                const overlay = document.getElementById('menu-overlay');
+
+                function toggleMenu() {
+                    sidebar.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                }
+
+                hamburgerBtn.addEventListener('click', toggleMenu);
+                closeBtn.addEventListener('click', toggleMenu);
+                overlay.addEventListener('click', toggleMenu);
+            });
+        </script>
+    </header>
+</body>
+</html>

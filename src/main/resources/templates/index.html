@@ -2,22 +2,43 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>ホーム - Kotan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ホーム - KOTAN</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
 </head>
 <body>
-    <h1>Kotan ホーム / Room</h1>
-    <!-- 担当者: B -->
-    <!-- 目的: ルートディレクトリ兼room用ページのUI実装 -->
-    <!-- 補足: ユーザーの部屋の状態を表現するメイン画面となるため、他のページへのナビゲーションも整備してください。 -->
-    
-    <ul>
-        <li><a th:href="@{/register}">登録画面</a></li>
-        <li><a th:href="@{/login}">ログイン画面</a></li>
-        <li><a th:href="@{/account}">アカウント情報</a></li>
-        <li><a th:href="@{/garden}">Garden</a></li>
-        <li><a th:href="@{/aquarium}">Aquarium</a></li>
-        <li><a th:href="@{/farm}">Farm</a></li>
-        <li><a th:href="@{/products}">商品一覧</a></li>
-    </ul>
+    <!-- ヘッダーの挿入 -->
+    <div th:replace="~{_header :: header}"></div>
+
+    <main class="container">
+        <h1 class="title">KOTAN</h1>
+        <p class="sub-title">あなたの毎日を彩る、最高の体験を。</p>
+        
+        <div style="text-align: center; margin-top: 40px;">
+            <h2>Room へようこそ</h2>
+            <p>ここではあなたの好みに合わせた部屋をカスタマイズできます。</p>
+        </div>
+
+        <div style="margin-top: 50px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+            <div style="background: white; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); text-align: center;">
+                <h3>Garden</h3>
+                <p>植物を育てて癒やしの空間を。</p>
+                <a th:href="@{/garden}" class="btn-primary" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">Go to Garden</a>
+            </div>
+            <div style="background: white; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); text-align: center;">
+                <h3>Aquarium</h3>
+                <p>魚たちと穏やかな時間を。</p>
+                <a th:href="@{/aquarium}" class="btn-primary" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">Go to Aquarium</a>
+            </div>
+            <div style="background: white; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); text-align: center;">
+                <h3>Farm</h3>
+                <p>収穫の喜びを共に。</p>
+                <a th:href="@{/farm}" class="btn-primary" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">Go to Farm</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- フッターの挿入 -->
+    <div th:replace="~{_footer :: footer}"></div>
 </body>
 </html>
