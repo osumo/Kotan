@@ -1,35 +1,146 @@
 package com.example.demo.controller;
 
+import java.util.Optional;
+
+import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.example.demo.entity.User;
+import com.example.demo.form.LoginForm;
+import com.example.demo.form.RegisterForm;
+import com.example.demo.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
 
 @Controller
+@RequiredArgsConstructor
 public class AuthController {
 
-    // 担当者: A
-    // 目的: ユーザー登録画面の表示
-    // 補足: 今後POSTメソッド(登録処理)の追加が必要です。
-    //      入力値のバリデーション（@Validatedなど）と、DBへのINSERT処理を実装してください。
-    @GetMapping("/register")
-    public String register() {
-        return "register";
-    }
+	private final UserRepository userRepository;
 
-    // 担当者: A
-    // 目的: ログイン画面の表示
-    // 補足: Spring Securityなどは使わず、セッションでログイン状態を管理する想定です。
-    //      今後POSTメソッド(ログイン処理)の追加と、DBのユーザー情報との照合処理が必要です。
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
+	// =========================
+	// ユーザー登録
+	// =========================
 
-    // 担当者: B
-    // 目的: アカウント情報画面の表示
-    // 補足: セッションからログインユーザー情報を取得し、画面に渡す処理が今後必要です。
-    //      必要に応じて、ユーザー情報の更新（編集機能）への導線も検討してください。
-    @GetMapping("/account")
-    public String account() {
-        return "account";
-    }
+	@GetMapping("/register")
+	public String registerForm(Model model) {
+
+		model.addAttribute("registerForm", new RegisterForm());
+
+		return "register";
+	}
+
+	@PostMapping("/register")
+	public String register(
+			@Valid @ModelAttribute RegisterForm registerForm,
+			BindingResult result,
+			Model model) {
+
+		// メール重複チェック
+		if (userRepository.findByEmail(registerForm.getEmail()).isPresent()) {
+			result.rejectValue(
+					"email",
+					"error.email",
+					"このメールアドレスは既に登録されています");
+		}
+
+		if (result.hasErrors()) {
+			return "register";
+		}
+
+		User user = new User();
+		user.setDisplayName(registerForm.getDisplayName());
+		user.setEmail(registerForm.getEmail());
+
+		// 本来はPasswordEncoder推奨
+		user.setPassword(registerForm.getPassword());
+
+		userRepository.save(user);
+
+		return "redirect:/login";
+	}
+
+	// =========================
+	// ログイン
+	// =========================
+
+	@GetMapping("/login")
+	public String loginForm(Model model) {
+
+		model.addAttribute("loginForm", new LoginForm());
+
+		return "login";
+	}
+
+	@PostMapping("/login")
+	public String login(
+			@Valid @ModelAttribute LoginForm loginForm,
+			BindingResult result,
+			HttpSession session,
+			Model model) {
+
+		if (result.hasErrors()) {
+			return "login";
+		}
+
+		Optional<User> optionalUser = userRepository.findByEmail(loginForm.getEmail());
+
+		if (optionalUser.isEmpty()) {
+
+			model.addAttribute("loginError", "メールアドレスまたはパスワードが違います");
+
+			return "login";
+		}
+
+		User user = optionalUser.get();
+
+		if (!user.getPassword().equals(loginForm.getPassword())) {
+
+			model.addAttribute("loginError", "メールアドレスまたはパスワードが違います");
+
+			return "login";
+		}
+
+		// セッション保存
+		session.setAttribute("loginUser", user);
+
+		return "redirect:/account";
+	}
+
+	// =========================
+	// アカウント画面
+	// =========================
+
+	@GetMapping("/account")
+	public String account(HttpSession session, Model model) {
+
+		User loginUser = (User) session.getAttribute("loginUser");
+
+		if (loginUser == null) {
+			return "redirect:/login";
+		}
+
+		model.addAttribute("user", loginUser);
+
+		return "account";
+	}
+
+	// =========================
+	// ログアウト
+	// =========================
+
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+
+		session.invalidate();
+
+		return "redirect:/login";
+	}
 }
