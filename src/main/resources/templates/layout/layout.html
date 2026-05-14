@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+</head>
+<body>
+    <header th:replace="~{common/header :: headerFragment}"></header>
+    
+    <main th:insert="~{this :: content}"></main> </body>
+</html>

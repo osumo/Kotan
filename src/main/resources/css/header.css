@@ -1,0 +1,56 @@
+/* ヘッダー全体の背景と高さ */
+.main-header {
+  background-color: #d8ebf9; /* 水色の背景 */
+  padding: 10px 40px;
+  border-bottom: 1px solid #ccc;
+}
+
+/* 要素を左右に振り分ける */
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ロゴのスタイル */
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* 右側ツール部分のレイアウト */
+.header-tools {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* 要素間の隙間 */
+}
+
+/* 検索バーのデザイン */
+.search-bar {
+  display: flex;
+  border: 1px solid #333;
+  background: white;
+  padding: 2px 5px;
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.search-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* アイコン類 */
+.settings-icon, .user-icon {
+  font-size: 20px;
+  cursor: pointer;
+}
