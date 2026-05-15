@@ -219,6 +219,37 @@ header {
     letter-spacing: 1px;
 }
 
+/* ログアウトボタンのプレミアムスタイル */
+.logout-item {
+    margin-top: 25px !important;
+    border-bottom: none !important;
+}
+
+.logout-link {
+    color: #e74c3c !important; /* 洗練された赤 */
+    font-weight: bold;
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px !important;
+    background-color: #fdf2f2;
+    border-radius: 8px;
+    transition: all 0.2s ease !important;
+    border: 1px solid #fadbd8;
+    font-size: 16px !important;
+}
+
+.logout-link:hover {
+    background-color: #fce4e4 !important;
+    border-color: #f5b7b1;
+    transform: translateX(5px);
+    box-shadow: 2px 2px 5px rgba(231, 76, 60, 0.1);
+}
+
+.logout-icon {
+    font-size: 18px;
+}
+
 /* オーバーレイ */
 .overlay {
     position: fixed;

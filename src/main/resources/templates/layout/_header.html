@@ -45,9 +45,10 @@
                     <li class="sub-menu"><a th:href="@{/garden}">GARDEN</a></li>
                     <li class="sub-menu"><a th:href="@{/aquarium}">AQUARIUM</a></li>
                     <li class="sub-menu"><a th:href="@{/farm}">FARM</a></li>
-
-                    <li style="margin-top: 20px;" th:if="${session.loginUser != null}">
-                        <a th:href="@{/logout}" style="color: #ff4d4d; font-weight: bold;">ログアウト</a>
+                    <li class="sub-menu logout-item" th:if="${session.loginUser != null}">
+                        <a th:href="@{/logout}" class="logout-link">
+                            <span class="logout-icon">⏻</span> ログアウト
+                        </a>
                     </li>
                 </ul>
             </nav>
