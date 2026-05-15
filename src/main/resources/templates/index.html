@@ -1,23 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>ホーム - Kotan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ホーム - KOTAN</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
 </head>
+
 <body>
-    <h1>Kotan ホーム / Room</h1>
-    <!-- 担当者: B -->
-    <!-- 目的: ルートディレクトリ兼room用ページのUI実装 -->
-    <!-- 補足: ユーザーの部屋の状態を表現するメイン画面となるため、他のページへのナビゲーションも整備してください。 -->
-    
-    <ul>
-        <li><a th:href="@{/register}">登録画面</a></li>
-        <li><a th:href="@{/login}">ログイン画面</a></li>
-        <li><a th:href="@{/account}">アカウント情報</a></li>
-        <li><a th:href="@{/garden}">Garden</a></li>
-        <li><a th:href="@{/aquarium}">Aquarium</a></li>
-        <li><a th:href="@{/farm}">Farm</a></li>
-        <li><a th:href="@{/products}">商品一覧</a></li>
-    </ul>
+    <!-- ヘッダーの挿入 -->
+    <div th:replace="~{layout/_header :: header}"></div>
+
+    <main class="container">
+        <!-- プレイエリアボタン（インライン） -->
+        <div th:replace="~{layout/_play_area_buttons :: buttons}"></div>
+
+        <h1 class="title">KOTAN</h1>
+        <p class="sub-title">あなたの毎日を彩る、最高の体験を。</p>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <h2>Room へようこそ</h2>
+            <p>ここではあなたの好みに合わせた部屋をカスタマイズできます。</p>
+        </div>
+    </main>
+
+    <!-- フッターの挿入 -->
+    <div th:replace="~{layout/_footer :: footer}"></div>
 </body>
+
 </html>
