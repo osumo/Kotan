@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.User;
 import com.example.demo.form.LoginForm;
@@ -41,6 +42,7 @@ public class AuthController {
 	public String register(
 			@Valid @ModelAttribute RegisterForm registerForm,
 			BindingResult result,
+			RedirectAttributes redirectAttributes,
 			Model model) {
 
 		// メール重複チェック
@@ -63,6 +65,8 @@ public class AuthController {
 		user.setPassword(registerForm.getPassword());
 
 		userRepository.save(user);
+
+		redirectAttributes.addFlashAttribute("successMessage", "アカウントが正常に作成されました。ログインしてください。");
 
 		return "redirect:/login";
 	}
@@ -111,7 +115,7 @@ public class AuthController {
 		// セッション保存
 		session.setAttribute("loginUser", user);
 
-		return "redirect:/account";
+		return "redirect:/";
 	}
 
 	// =========================

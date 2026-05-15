@@ -25,7 +25,7 @@
             
             <!-- ユーザー情報表示 -->
             <div class="user-info">
-                <span class="user-greeting" th:text="'ようこそ' + (${username} ?: 'ゲスト') + 'さん'">ようこそゲストさん</span>
+                <span class="user-greeting" th:text="'ようこそ ' + (${session.loginUser != null ? session.loginUser.displayName : 'ゲスト'}) + ' さん'">ようこそゲストさん</span>
                 <a th:href="@{/account}" class="account-link" title="アカウント情報">⚪</a>
             </div>
 
@@ -41,6 +41,10 @@
                     <li class="sub-menu"><a th:href="@{/garden}">GARDEN</a></li>
                     <li class="sub-menu"><a th:href="@{/aquarium}">AQUARIUM</a></li>
                     <li class="sub-menu"><a th:href="@{/farm}">FARM</a></li>
+
+                    <li style="margin-top: 20px;" th:if="${session.loginUser != null}">
+                        <a th:href="@{/logout}" style="color: #ff4d4d; font-weight: bold;">ログアウト</a>
+                    </li>
                 </ul>
             </nav>
         </div>
