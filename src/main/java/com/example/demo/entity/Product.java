@@ -3,23 +3,14 @@ package com.example.demo.entity;
 public class Product {
 
 	private Integer id;
-
 	private Integer categoryId;
-
 	private String name;
-
 	private String description;
-
 	private Integer price;
-
 	private String imageUrl;
-
 	private String itemType;
-
 	private Float weight;
-
 	private Integer growthDays;
-
 	private Integer stock;
 
 	// ===== getter / setter =====
@@ -48,17 +39,6 @@ public class Product {
 		this.name = name;
 	}
 
-<<<<<<< HEAD
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
-}
-=======
 	public String getDescription() {
 		return description;
 	}
@@ -115,4 +95,3 @@ public class Product {
 		this.stock = stock;
 	}
 }
->>>>>>> main

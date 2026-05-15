@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ショッピングカート - KOTAN</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <style>
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .cart-table th, .cart-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        .cart-table th {
+            background-color: #f9f9f9;
+            font-weight: bold;
+        }
+        .cart-total {
+            text-align: right;
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .empty-cart {
+            text-align: center;
+            padding: 50px;
+            background: white;
+            border-radius: 8px;
+        }
+        .remove-btn {
+            background: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .checkout-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div th:replace="~{layout/_header :: header}"></div>
+
+    <main class="container">
+        <h1 class="title">ショッピングカート</h1>
+
+        <div th:if="${cart.items.empty}" class="empty-cart">
+            <p>カートに商品が入っていません。</p>
+            <a th:href="@{/products}" class="btn-primary" style="display: inline-block; width: auto; padding: 0 30px; line-height: 45px; text-decoration: none;">ショッピングを続ける</a>
+        </div>
+
+        <div th:if="${!cart.items.empty}">
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>画像</th>
+                        <th>商品名</th>
+                        <th>単価</th>
+                        <th>数量</th>
+                        <th>小計</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${cart.items}">
+                        <td><img th:src="${item.imageUrl}" width="60" style="border-radius: 4px;"></td>
+                        <td th:text="${item.name}">商品名</td>
+                        <td th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')} + '円'">価格</td>
+                        <td th:text="${item.quantity}">数量</td>
+                        <td th:text="${#numbers.formatDecimal(item.subtotal, 0, 'COMMA', 0, 'POINT')} + '円'">小計</td>
+                        <td>
+                            <form th:action="@{/cart/remove}" method="post">
+                                <input type="hidden" name="productId" th:value="${item.productId}">
+                                <button type="submit" class="remove-btn">削除</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="cart-total">
+                合計金額: <span th:text="${#numbers.formatDecimal(cart.totalPrice, 0, 'COMMA', 0, 'POINT')} + '円'">0円</span>
+            </div>
+
+            <div class="checkout-container">
+                <a th:href="@{/products}" style="color: #666; text-decoration: none;">← ショッピングを続ける</a>
+                <button class="btn-primary" style="margin: 0;">購入手続きへ進む</button>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="~{layout/_footer :: footer}"></div>
+</body>
+
+</html>
