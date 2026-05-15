@@ -111,7 +111,7 @@ public class AuthController {
 		// セッション保存
 		session.setAttribute("loginUser", user);
 
-		return "redirect:/account";
+		return "redirect:/";
 	}
 
 	// =========================
