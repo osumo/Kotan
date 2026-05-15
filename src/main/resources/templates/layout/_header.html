@@ -30,6 +30,7 @@
                             <option value="100000" th:selected="${param.maxPrice == '100000'}">100,000円</option>
                         </select>
                     </div>
+                    <div class="header-divider"></div>
                     <select name="categoryId" class="header-select">
                         <option value="">全カテゴリ</option>
                         <option value="1" th:selected="${param.categoryId == '1'}">農産物</option>
@@ -37,6 +38,7 @@
                         <option value="3" th:selected="${param.categoryId == '3'}">畜産物</option>
                         <option value="4" th:selected="${param.categoryId == '4'}">その他</option>
                     </select>
+                    <div class="header-divider"></div>
                     <input type="text" name="keyword" placeholder="Search" class="search-box" th:value="${param.keyword}">
                     <button type="submit" class="search-icon-btn">🔍</button>
                 </div>

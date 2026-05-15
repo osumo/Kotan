@@ -31,26 +31,12 @@
                     </select>
                 </div>
                 
-                <div class="filter-group">
-                    <label>価格範囲</label>
-                    <div class="price-range-container">
-                        <select name="minPrice" class="filter-select mini">
-                            <option value="">下限なし</option>
-                            <option value="100" th:selected="${param.minPrice == '100'}">100円</option>
-                            <option value="500" th:selected="${param.minPrice == '500'}">500円</option>
-                            <option value="1000" th:selected="${param.minPrice == '1000'}">1,000円</option>
-                            <option value="5000" th:selected="${param.minPrice == '5000'}">5,000円</option>
-                            <option value="10000" th:selected="${param.minPrice == '10000'}">10,000円</option>
-                        </select>
-                        <span class="range-separator">〜</span>
-                        <select name="maxPrice" class="filter-select mini">
-                            <option value="">上限なし</option>
-                            <option value="1000" th:selected="${param.maxPrice == '1000'}">1,000円</option>
-                            <option value="5000" th:selected="${param.maxPrice == '5000'}">5,000円</option>
-                            <option value="10000" th:selected="${param.maxPrice == '10000'}">10,000円</option>
-                            <option value="50000" th:selected="${param.maxPrice == '50000'}">50,000円</option>
-                            <option value="100000" th:selected="${param.maxPrice == '100000'}">100,000円</option>
-                        </select>
+                <div class="filter-group slider-group">
+                    <label>価格範囲: <span id="price-display">0円 〜 100,000円</span></label>
+                    <div class="dual-range-slider">
+                        <div class="slider-track"></div>
+                        <input type="range" name="minPrice" id="min-price" min="0" max="100000" step="100" th:value="${param.minPrice != null ? param.minPrice : 0}">
+                        <input type="range" name="maxPrice" id="max-price" min="0" max="100000" step="100" th:value="${param.maxPrice != null ? param.maxPrice : 100000}">
                     </div>
                 </div>
                 
@@ -73,6 +59,44 @@
     </main>
 
     <div th:replace="~{layout/_footer :: footer}"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const minSlider = document.getElementById('min-price');
+            const maxSlider = document.getElementById('max-price');
+            const display = document.getElementById('price-display');
+            const track = document.querySelector('.slider-track');
+
+            function updateSlider() {
+                let minVal = parseInt(minSlider.value);
+                let maxVal = parseInt(maxSlider.value);
+
+                if (maxVal - minVal < 0) {
+                    if (this === minSlider) {
+                        minSlider.value = maxVal;
+                    } else {
+                        maxSlider.value = minVal;
+                    }
+                }
+
+                minVal = parseInt(minSlider.value);
+                maxVal = parseInt(maxSlider.value);
+
+                display.textContent = `${minVal.toLocaleString()}円 〜 ${maxVal.toLocaleString()}円`;
+                
+                // トラックの色付け
+                const minPercent = (minVal / 100000) * 100;
+                const maxPercent = (maxVal / 100000) * 100;
+                track.style.background = `linear-gradient(to right, #eee ${minPercent}%, #333 ${minPercent}%, #333 ${maxPercent}%, #eee ${maxPercent}%)`;
+            }
+
+            minSlider.addEventListener('input', updateSlider);
+            maxSlider.addEventListener('input', updateSlider);
+            
+            // 初期表示
+            updateSlider();
+        });
+    </script>
 </body>
 
 </html>
