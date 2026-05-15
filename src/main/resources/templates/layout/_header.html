@@ -24,10 +24,11 @@
             <div class="sidebar-header">
                 <div class="close-menu" id="close-btn">&times;</div>
             </div>
-            
+
             <!-- ユーザー情報表示 -->
             <div class="user-info">
-                <span class="user-greeting" th:text="'ようこそ ' + (${session.loginUser != null ? session.loginUser.displayName : 'ゲスト'}) + ' さん'">ようこそゲストさん</span>
+                <span class="user-greeting"
+                    th:text="'ようこそ ' + (${session.loginUser != null ? session.loginUser.displayName : 'ゲスト'}) + ' さん'">ようこそゲストさん</span>
                 <a th:href="@{/account}" class="account-link" title="アカウント情報">
                     <img th:src="@{/images/user_icon.png}" alt="Account" class="user-icon-img">
                 </a>
@@ -39,23 +40,27 @@
                     <li><a th:href="@{/products}">商品一覧</a></li>
                     <li><a th:href="@{/cart}">カート</a></li>
                     <li><a th:href="@{/favorites}">お気に入り</a></li>
-                    
-                    <div class="category-title">プレイエリア</div>
-                    <li class="sub-menu"><a th:href="@{/}">ROOM</a></li>
-                    <li class="sub-menu"><a th:href="@{/garden}">GARDEN</a></li>
-                    <li class="sub-menu"><a th:href="@{/aquarium}">AQUARIUM</a></li>
-                    <li class="sub-menu"><a th:href="@{/farm}">FARM</a></li>
-                    <li class="sub-menu logout-item" th:if="${session.loginUser != null}">
-                        <a th:href="@{/logout}" class="logout-link">
-                            <span class="logout-icon">⏻</span> ログアウト
-                        </a>
-                    </li>
+
+                    <th:block th:if="${session.loginUser != null}">
+                        <div class="category-title">プレイエリア</div>
+                        <li class="sub-menu"><a th:href="@{/}">ROOM</a></li>
+                        <li class="sub-menu"><a th:href="@{/garden}">GARDEN</a></li>
+                        <li class="sub-menu"><a th:href="@{/aquarium}">AQUARIUM</a></li>
+                        <li class="sub-menu"><a th:href="@{/farm}">FARM</a></li>
+
+                        <li class="sub-menu logout-item">
+                            <a th:href="@{/logout}" class="logout-link">
+                                <span class="logout-icon">⏻</span> ログアウト
+                            </a>
+                        </li>
+                    </th:block>
+
                 </ul>
             </nav>
         </div>
 
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 const hamburgerBtn = document.getElementById('hamburger-btn');
                 const closeBtn = document.getElementById('close-btn');
                 const sidebar = document.getElementById('sidebar-menu');
@@ -75,4 +80,5 @@
         </script>
     </header>
 </body>
+
 </html>
