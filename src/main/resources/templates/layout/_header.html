@@ -14,7 +14,23 @@
         <div class="right-header">
             <form th:action="@{/products}" method="get" class="search-form">
                 <div class="search-container">
-                    <select name="categoryId" class="header-category-select">
+                    <div class="header-filters">
+                        <select name="minPrice" class="header-select mini">
+                            <option value="">下限</option>
+                            <option value="100" th:selected="${param.minPrice == '100'}">100円</option>
+                            <option value="1000" th:selected="${param.minPrice == '1000'}">1,000円</option>
+                            <option value="5000" th:selected="${param.minPrice == '5000'}">5,000円</option>
+                        </select>
+                        <span class="header-separator">〜</span>
+                        <select name="maxPrice" class="header-select mini">
+                            <option value="">上限</option>
+                            <option value="1000" th:selected="${param.maxPrice == '1000'}">1,000円</option>
+                            <option value="5000" th:selected="${param.maxPrice == '5000'}">5,000円</option>
+                            <option value="10000" th:selected="${param.maxPrice == '10000'}">10,000円</option>
+                            <option value="100000" th:selected="${param.maxPrice == '100000'}">100,000円</option>
+                        </select>
+                    </div>
+                    <select name="categoryId" class="header-select">
                         <option value="">全カテゴリ</option>
                         <option value="1" th:selected="${param.categoryId == '1'}">農産物</option>
                         <option value="2" th:selected="${param.categoryId == '2'}">水産物</option>

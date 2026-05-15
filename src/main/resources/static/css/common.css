@@ -394,11 +394,19 @@ footer {
     align-items: center;
 }
 
-.header-category-select {
-    height: 35px;
+.header-filters {
+    display: flex;
+    align-items: center;
+    background-color: #f8f9fa;
     border: 1px solid #ccc;
     border-right: none;
     border-radius: 4px 0 0 4px;
+}
+
+.header-select {
+    height: 35px;
+    border: 1px solid #ccc;
+    border-right: none;
     padding: 0 5px 0 10px;
     background-color: #f8f9fa;
     font-size: 13px;
@@ -408,12 +416,27 @@ footer {
     transition: background-color 0.2s;
 }
 
-.header-category-select:hover {
+/* header-filters内にあるセレクトは枠線を消して一体化させる */
+.header-filters .header-select {
+    border: none;
+}
+
+.header-select.mini {
+    min-width: 60px;
+    padding-right: 0;
+}
+
+.header-separator {
+    font-size: 12px;
+    color: #999;
+}
+
+.header-select:hover {
     background-color: #f0f1f2;
 }
 
 .search-container .search-box {
-    width: 200px;
+    width: 150px;
     border-radius: 0 4px 4px 0;
 }
 
