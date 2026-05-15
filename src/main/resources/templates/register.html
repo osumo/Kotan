@@ -9,7 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/auth.css}">
 </head>
 
-<body class="auth-layout">
+<body>
     <!-- ヘッダーの挿入 -->
     <div th:replace="~{layout/_header :: header}"></div>
 
@@ -21,7 +21,7 @@
             <form th:action="@{/register}" th:object="${registerForm}" method="post" class="auth-form">
                 <div class="form-group">
                     <label for="displayName">表示名</label>
-                    <input type="text" id="displayName" th:field="*{displayName}" placeholder="ニックネームを入力">
+                    <input type="text" id="displayName" th:field="*{displayName}" placeholder="ニックネームを入力" autofocus>
                     <span class="error-message" th:if="${#fields.hasErrors('displayName')}" th:errors="*{displayName}"></span>
                 </div>
 
