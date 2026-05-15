@@ -15,19 +15,20 @@
             <form th:action="@{/products}" method="get" class="search-form">
                 <div class="search-container">
                     <div class="header-filters">
-                        <div class="price-range-container" id="header-price-range">
-                            <div class="price-values">
-                                <span class="min-label">0円</span>
-                                <span>〜</span>
-                                <span class="max-label">10万</span>
-                            </div>
-                            <div class="slider-container">
-                                <div class="slider-track"></div>
-                                <div class="slider-range"></div>
-                                <input type="range" name="minPrice" class="price-slider min-slider" min="0" max="100000" step="100" th:value="${param.minPrice != null ? param.minPrice : 0}">
-                                <input type="range" name="maxPrice" class="price-slider max-slider" min="0" max="100000" step="100" th:value="${param.maxPrice != null ? param.maxPrice : 100000}">
-                            </div>
-                        </div>
+                        <select name="minPrice" class="header-select mini">
+                            <option value="">下限</option>
+                            <option value="100" th:selected="${param.minPrice == '100'}">100円</option>
+                            <option value="1000" th:selected="${param.minPrice == '1000'}">1,000円</option>
+                            <option value="5000" th:selected="${param.minPrice == '5000'}">5,000円</option>
+                        </select>
+                        <span class="header-separator">〜</span>
+                        <select name="maxPrice" class="header-select mini">
+                            <option value="">上限</option>
+                            <option value="1000" th:selected="${param.maxPrice == '1000'}">1,000円</option>
+                            <option value="5000" th:selected="${param.maxPrice == '5000'}">5,000円</option>
+                            <option value="10000" th:selected="${param.maxPrice == '10000'}">10,000円</option>
+                            <option value="100000" th:selected="${param.maxPrice == '100000'}">100,000円</option>
+                        </select>
                     </div>
                     <select name="categoryId" class="header-select">
                         <option value="">全カテゴリ</option>
@@ -100,45 +101,9 @@
                     body.classList.toggle('sidebar-open');
                 }
 
-                function initPriceSlider(containerId) {
-                    const container = document.getElementById(containerId);
-                    if (!container) return;
-
-                    const minSlider = container.querySelector('.min-slider');
-                    const maxSlider = container.querySelector('.max-slider');
-                    const minLabel = container.querySelector('.min-label');
-                    const maxLabel = container.querySelector('.max-label');
-                    const range = container.querySelector('.slider-range');
-
-                    function updateSlider() {
-                        let minVal = parseInt(minSlider.value);
-                        let maxVal = parseInt(maxSlider.value);
-
-                        if (minVal > maxVal) {
-                            minSlider.value = maxVal;
-                            minVal = maxVal;
-                        }
-
-                        const minPercent = (minVal / minSlider.max) * 100;
-                        const maxPercent = (maxVal / maxSlider.max) * 100;
-
-                        range.style.left = minPercent + "%";
-                        range.style.width = (maxPercent - minPercent) + "%";
-
-                        minLabel.textContent = minVal.toLocaleString() + "円";
-                        maxLabel.textContent = maxVal.toLocaleString() + "円";
-                    }
-
-                    minSlider.addEventListener('input', updateSlider);
-                    maxSlider.addEventListener('input', updateSlider);
-                    updateSlider();
-                }
-
                 hamburgerBtn.addEventListener('click', toggleMenu);
                 closeBtn.addEventListener('click', toggleMenu);
                 overlay.addEventListener('click', toggleMenu);
-                
-                initPriceSlider('header-price-range');
             });
         </script>
     </header>

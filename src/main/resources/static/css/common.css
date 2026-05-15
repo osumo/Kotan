@@ -391,108 +391,85 @@ footer {
 .search-container {
     display: flex;
     align-items: center;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px; /* 落ち着いた角丸に変更 */
-    padding: 0 0 0 12px;
-    transition: border-color 0.2s;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    padding: 2px 5px 2px 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
 }
 
 .search-container:focus-within {
-    border-color: #333;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-color: #999;
 }
 
 .header-filters {
     display: flex;
     align-items: center;
-    gap: 12px;
+    border: none;
+    background: none;
 }
 
 .header-select {
-    height: 38px;
+    height: 32px;
     border: none;
-    background-color: transparent;
+    background: none;
     font-size: 13px;
-    color: #444;
+    color: #555;
     cursor: pointer;
     outline: none;
     padding: 0 8px;
+    transition: color 0.2s;
 }
 
-.price-range-container {
-    display: flex;
-    flex-direction: column;
-    min-width: 140px;
-    padding-right: 5px;
+.header-select:hover {
+    color: #000;
 }
 
-.price-values {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-    font-size: 11px;
-    color: #888;
-    margin-bottom: -2px;
-}
-
-.slider-container {
-    position: relative;
-    height: 20px;
-    display: flex;
-    align-items: center;
-}
-
-.slider-track {
-    position: absolute;
-    width: 100%;
-    height: 3px; /* より細く */
-    background-color: #eee;
-    z-index: 1;
-}
-
-.slider-range {
-    position: absolute;
-    height: 3px;
-    background-color: #666;
-    z-index: 2;
-}
-
-input[type="range"].price-slider::-webkit-slider-thumb {
-    height: 12px;
-    width: 12px;
-    border-radius: 50%;
-    background-color: white;
-    border: 1px solid #666;
-    cursor: pointer;
-    -webkit-appearance: none;
-    pointer-events: auto;
+.header-separator {
+    color: #ddd;
+    margin: 0;
+    font-size: 12px;
 }
 
 .search-container .search-box {
     border: none;
-    height: 38px;
-    width: 160px;
-    font-size: 14px;
-    background-color: transparent;
-    outline: none;
-    border-left: 1px solid #eee; /* 入力欄の前だけ仕切りを入れる */
+    border-left: 1px solid #eee;
+    height: 24px;
+    margin-left: 10px;
     padding-left: 12px;
+    width: 160px;
+    background: none;
+    border-radius: 0;
+    font-size: 14px;
+}
+
+.search-container .search-box:focus {
+    outline: none;
 }
 
 .search-icon-btn {
-    width: 40px;
-    height: 40px;
+    position: static;
+    width: 30px;
+    height: 30px;
     background-color: #333;
     color: white;
-    border: none;
-    border-radius: 0 8px 8px 0; /* 右側だけ角丸 */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    margin-left: 5px;
     cursor: pointer;
-    font-size: 16px;
-    margin-left: auto;
+    transition: background-color 0.2s;
+    border: none;
 }
 
-.header-divider {
-    display: none; /* シンプルにするために非表示 */
+.search-icon-btn:hover {
+    background-color: #000;
+    color: white;
 }
 
 .filter-section {
@@ -538,95 +515,13 @@ input[type="range"].price-slider::-webkit-slider-thumb {
 
 .price-range-container {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-    min-width: 250px;
-}
-
-.slider-container {
-    position: relative;
-    height: 40px;
-    display: flex;
     align-items: center;
+    gap: 10px;
 }
 
-.slider-track {
-    position: absolute;
-    width: 100%;
-    height: 6px;
-    background-color: #eee;
-    border-radius: 3px;
-    z-index: 1;
-}
-
-.slider-range {
-    position: absolute;
-    height: 6px;
-    background-color: #333;
-    border-radius: 3px;
-    z-index: 2;
-}
-
-input[type="range"].price-slider {
-    position: absolute;
-    width: 100%;
-    height: 0;
-    -webkit-appearance: none;
-    background: none;
-    pointer-events: none;
-    z-index: 3;
-    outline: none;
-}
-
-input[type="range"].price-slider::-webkit-slider-thumb {
-    height: 18px;
-    width: 18px;
-    border-radius: 50%;
-    background-color: white;
-    border: 2px solid #333;
-    cursor: pointer;
-    -webkit-appearance: none;
-    pointer-events: auto;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-input[type="range"].price-slider::-moz-range-thumb {
-    height: 18px;
-    width: 18px;
-    border-radius: 50%;
-    background-color: white;
-    border: 2px solid #333;
-    cursor: pointer;
-    pointer-events: auto;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-.price-values {
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    color: #666;
+.range-separator {
+    color: #888;
     font-weight: bold;
-}
-
-/* ヘッダー用スライダーのコンパクト化 */
-.header-filters .price-range-container {
-    min-width: 150px;
-    gap: 2px;
-}
-
-.header-filters .slider-container {
-    height: 25px;
-}
-
-.header-filters .price-values {
-    font-size: 10px;
-}
-
-.header-filters input[type="range"].price-slider::-webkit-slider-thumb {
-    height: 12px;
-    width: 12px;
 }
 
 .filter-btn {
