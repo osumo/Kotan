@@ -392,102 +392,107 @@ footer {
     display: flex;
     align-items: center;
     background-color: white;
-    border: 1px solid #e0e0e0;
-    border-radius: 50px; /* 角を丸くしてモダンに */
-    padding: 2px 5px 2px 15px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    transition: all 0.3s ease;
+    border: 1px solid #ddd;
+    border-radius: 8px; /* 落ち着いた角丸に変更 */
+    padding: 0 0 0 12px;
+    transition: border-color 0.2s;
 }
 
 .search-container:focus-within {
-    border-color: #b0d4f1;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    border-color: #333;
 }
 
 .header-filters {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 12px;
 }
 
 .header-select {
-    height: 32px;
+    height: 38px;
     border: none;
     background-color: transparent;
     font-size: 13px;
-    color: #666;
+    color: #444;
     cursor: pointer;
     outline: none;
-    padding: 0 5px;
+    padding: 0 8px;
 }
 
-.header-select:hover {
-    color: #333;
+.price-range-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 140px;
+    padding-right: 5px;
 }
 
-.header-select.mini {
-    min-width: 70px;
-}
-
-/* 項目間の区切り線 */
-.header-filters::after,
-.header-select[name="categoryId"]::after {
-    content: "";
-    height: 18px;
-    width: 1px;
-    background-color: #eee;
-    margin: 0 10px;
-}
-
-/* select自体の後の線を出すために、直後の要素にマージンをつける等の調整が必要なため、
-   実態に合わせて以下のようにセパレーターを定義し直します */
-
-.header-separator {
+.price-values {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
     font-size: 11px;
-    color: #ccc;
-    margin: 0 2px;
+    color: #888;
+    margin-bottom: -2px;
 }
 
-.header-divider {
-    width: 1px;
+.slider-container {
+    position: relative;
     height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.slider-track {
+    position: absolute;
+    width: 100%;
+    height: 3px; /* より細く */
     background-color: #eee;
-    margin: 0 12px;
+    z-index: 1;
+}
+
+.slider-range {
+    position: absolute;
+    height: 3px;
+    background-color: #666;
+    z-index: 2;
+}
+
+input[type="range"].price-slider::-webkit-slider-thumb {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background-color: white;
+    border: 1px solid #666;
+    cursor: pointer;
+    -webkit-appearance: none;
+    pointer-events: auto;
 }
 
 .search-container .search-box {
     border: none;
-    height: 36px;
-    width: 180px;
-    padding-left: 5px;
+    height: 38px;
+    width: 160px;
     font-size: 14px;
     background-color: transparent;
     outline: none;
+    border-left: 1px solid #eee; /* 入力欄の前だけ仕切りを入れる */
+    padding-left: 12px;
 }
 
 .search-icon-btn {
-    width: 34px;
-    height: 34px;
+    width: 40px;
+    height: 40px;
     background-color: #333;
     color: white;
     border: none;
-    border-radius: 50%;
+    border-radius: 0 8px 8px 0; /* 右側だけ角丸 */
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     font-size: 16px;
-    transition: background-color 0.2s, transform 0.1s;
-    margin-left: 5px;
+    margin-left: auto;
 }
 
-.search-icon-btn:hover {
-    background-color: #555;
-    transform: scale(1.05);
-}
-
-.search-icon-btn:active {
-    transform: scale(0.95);
+.header-divider {
+    display: none; /* シンプルにするために非表示 */
 }
 
 .filter-section {
