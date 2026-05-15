@@ -3,7 +3,8 @@
 -- 1. users
 INSERT INTO users (email, password, display_name, total_spent, converted_spent) VALUES
 ('test@example.com', '$2a$10$vW9mYh4wF.S.mU.zUuGv.e', 'テストユーザー', 5000, 3000),
-('user2@example.com', '$2a$10$vW9mYh4wF.S.mU.zUuGv.e', 'サトシ', 12000, 10000);
+('user2@example.com', '$2a$10$vW9mYh4wF.S.mU.zUuGv.e', 'サトシ', 12000, 10000),
+('aaa@example.com', 'aaa', 'AAA', 0, 0);
 
 -- 2. categories
 INSERT INTO categories (name) VALUES
