@@ -25,27 +25,25 @@ INSERT INTO user_coupons (user_id, coupon_id, expire_at) VALUES
 (1, 3, '2026-06-30 23:59:59'),
 (2, 2, '2026-12-31 23:59:59');
 
--- 5. products (EC商品は在庫あり、アイテムは在庫0または管理外)
-INSERT INTO products (category_id, name, description, price, item_type, stock, growth_days, weight) VALUES
+-- 5. products
+INSERT INTO products (category_id, name, description, price, image_url, item_type, stock, growth_days, weight) VALUES
 -- 農産物
-(1, '北海道産じゃがいも 5kg', 'ホクホクでおいしいじゃがいもです。', 2500, 'FOOD', 100, 0, 0),
-(1, 'じゃがいもの種', '庭に植えるとじゃがいもが育ちます。', 500, 'PLANT', 0, 7, 0),
+(1, '北海道産じゃがいも 5kg', 'ホクホクでおいしいじゃがいもです。', 2500, '/images/potato_box.png', 'FOOD', 100, 0, 0),
+(1, 'じゃがいもの種', '庭に植えるとじゃがいもが育ちます。', 500, '/images/potato_seed.png', 'PLANT', 0, 7, 0),
 -- 水産物
-(2, '特選毛ガニ', '身がぎっしり詰まった毛ガニです。', 8000, 'FOOD', 50, 0, 0),
-(2, 'サケ（稚魚）', 'アクアリウムで育てるサケの稚魚です。', 1000, 'FISH', 0, 0, 1.5),
+(2, '特選毛ガニ', '身がぎっしり詰まった毛ガニです。', 8000, '/images/crab.png', 'FOOD', 50, 0, 0),
+(2, 'サケ（稚魚）', 'アクアリウムで育てるサケの稚魚です。', 1000, '/images/salmon_fry.png', 'FISH', 0, 0, 1.5),
 -- 畜産物
-(3, '十勝和牛 ステーキ用', 'とろけるような食感の和牛です。', 12000, 'FOOD', 30, 0, 0),
+(3, '十勝和牛 ステーキ用', 'とろけるような食感の和牛です。', 12000, '/images/wagyu_steak.png', 'FOOD', 30, 0, 0),
 -- その他・家具
-(4, '木製の机', 'シンプルで使いやすい家具です。', 5000, 'FURNITURE', 0, 0, 0),
-(4, '雪だるまの置物', '冬にぴったりの可愛い置物です。', 2000, 'FURNITURE', 0, 0, 0),
-(4, 'ガチャコイン', 'メタバース内でガチャが回せます。', 0, 'OTHER', 0, 0, 0);
+(4, '木製の机', 'シンプルで使いやすい家具です。', 5000, '/images/desk.png', 'FURNITURE', 0, 0, 0),
+(4, '雪だるまの置物', '冬にぴったりの可愛い置物です。', 2000, '/images/snowman.png', 'FURNITURE', 0, 0, 0);
 
 -- 6. inventory
 INSERT INTO inventory (user_id, product_id, quantity) VALUES
-(1, 2, 5), -- テストユーザーがじゃがいもの種を5個所持
-(1, 6, 1), -- テストユーザーが机を1個所持
-(1, 8, 10), -- テストユーザーがガチャコインを10個所持
-(2, 4, 3); -- サトシがサケの稚魚を3匹所持
+(1, 2, 5),
+(1, 6, 1),
+(2, 4, 3);
 
 -- 7. room_placements
 INSERT INTO room_placements (user_id, product_id, pos_x, pos_y) VALUES
@@ -61,7 +59,7 @@ INSERT INTO aquarium_events (title, target_weight, current_weight, end_at) VALUE
 
 -- 10. achievements
 INSERT INTO achievements (title, description, reward_product_id) VALUES
-('最初の一歩', '初めてログインする', 8),
+('最初の一歩', '初めてログインする', 6), -- 机を報酬に変更
 ('庭師の卵', '初めて種を植える', 6),
 ('爆買い王', '累計購入金額が10,000円を突破', 7);
 
@@ -73,7 +71,7 @@ INSERT INTO user_achievements (user_id, achievement_id) VALUES
 
 -- 12. orders
 INSERT INTO orders (user_id, total_price) VALUES
-(1, 2250), -- 2500円のじゃがいもに10%クーポン適用
+(1, 2250),
 (2, 12000);
 
 -- 13. applied_coupons

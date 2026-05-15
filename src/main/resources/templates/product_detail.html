@@ -2,43 +2,55 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>商品詳細 - Kotan</title>
+    <title>商品詳細 - KOTAN</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+	<link rel="stylesheet" th:href="@{/css/product_detail.css}">
 </head>
 <body>
+    <div th:replace="~{layout/_header :: header}"></div>
 
-    <h1>商品詳細</h1>
+    <main class="container">
+        <div th:if="${product != null}" class="product-detail-container">
+            <!-- 商品画像 -->
+            <img th:src="${product.imageUrl}" alt="商品画像" class="product-image">
 
-    <!-- 商品が存在する場合 -->
-    <div th:if="${product != null}">
+            <div class="product-info">
+                <!-- 商品名 -->
+                <h1 th:text="${product.name}" style="margin-bottom: 10px;"></h1>
 
-        <!-- 商品画像 -->
-        <img th:src="${product.imageUrl}"
-             alt="商品画像"
-             width="300">
+                <!-- 商品価格 -->
+                <div class="price-tag">
+                    <span th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}"></span>円
+                </div>
 
-        <!-- 商品名 -->
-        <h2 th:text="${product.name}"></h2>
+                <!-- 商品説明 -->
+                <p class="description" th:text="${product.description}"></p>
 
-        <!-- 商品価格 -->
-        <p>
-            価格：
-            <span th:text="${product.price}"></span>円
-        </p>
+                <hr style="margin-bottom: 25px; border: 0; border-top: 1px solid #eee;">
 
-        <!-- 商品説明 -->
-        <p th:text="${product.description}"></p>
+                <!-- カートに追加フォーム -->
+                <form th:action="@{/cart/add}" method="post">
+                    <input type="hidden" name="productId" th:value="${product.id}">
+                    <div class="form-group" style="display: flex; align-items: center; gap: 15px;">
+                        <label style="margin: 0;">数量:</label>
+                        <input type="number" name="quantity" value="1" min="1" style="width: 80px; text-align: center;">
+                    </div>
+                    <button type="submit" class="btn-primary" style="margin: 20px 0 0 0; width: 200px;">カートに入れる</button>
+                </form>
+            </div>
+        </div>
 
-    </div>
+        <div th:if="${product == null}" style="text-align: center; padding: 50px;">
+            <p>商品が見つかりません。</p>
+            <a th:href="@{/products}" class="btn-primary" style="display: inline-block; text-decoration: none; line-height: 45px;">商品一覧へ戻る</a>
+        </div>
 
-    <!-- 商品が存在しない場合 -->
-    <div th:if="${product == null}">
-        <p>商品が見つかりません。</p>
-    </div>
+        <div style="margin-top: 40px;">
+            <a th:href="@{/products}" style="color: #666; text-decoration: none;">← 商品一覧へ戻る</a><br>
+            <a th:href="@{/}" style="color: #666; text-decoration: none;">← ホームへ戻る</a>
+        </div>
+    </main>
 
-    <hr>
-
-    <a th:href="@{/products}">商品一覧へ戻る</a><br>
-    <a th:href="@{/}">ホームへ戻る</a>
-
+    <div th:replace="~{layout/_footer :: footer}"></div>
 </body>
 </html>

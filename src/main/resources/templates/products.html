@@ -1,21 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>商品一覧 - Kotan</title>
+    <title>商品一覧 - KOTAN</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/products.css}">
 </head>
+
 <body>
-    <h1>商品一覧</h1>
-    <!-- 担当者: D -->
-    <!-- 目的: データベースから取得した商品のリスト表示 -->
-    <!-- 補足: Controllerから渡された商品のリストをth:eachでループさせ、一覧としてきれいに表示してください。 -->
-	<li th:each="product : ${products}">
-	    <a th:href="'/product/' + ${product.id}">
-	        [[${product.name}]]
-	        （[[${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}]]円）
-	    </a>
-	</li>
-	
-    <a th:href="@{/}">ホームへ戻る</a>
+    <div th:replace="~{layout/_header :: header}"></div>
+
+    <main class="container">
+        <h1 class="title">商品一覧</h1>
+        
+        <div class="product-grid">
+            <a th:href="'/product/' + ${product.id}" class="product-card" th:each="product : ${products}">
+                <img th:src="${product.imageUrl}" alt="商品画像" class="product-image">
+                <div class="product-name" th:text="${product.name}">商品名</div>
+                <div class="product-price" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + '円'"></div>
+            </a>
+        </div>
+        
+        <div style="margin-top: 50px; text-align: center;">
+            <a th:href="@{/}" style="color: #666; text-decoration: none;">← ホームへ戻る</a>
+        </div>
+    </main>
+
+    <div th:replace="~{layout/_footer :: footer}"></div>
 </body>
+
 </html>
