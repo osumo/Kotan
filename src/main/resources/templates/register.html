@@ -1,37 +1,53 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>ユーザー登録</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ユーザー登録 - KOTAN</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/auth.css}">
 </head>
+
 <body>
+    <!-- ヘッダーの挿入 -->
+    <div th:replace="~{layout/_header :: header}"></div>
 
-<h1>ユーザー登録</h1>
+    <main class="auth-page">
+        <div class="auth-container">
+            <h1 class="auth-title">KOTAN アカウント作成</h1>
+            <p class="auth-subtitle">新しい体験をここから始めましょう</p>
 
-<form th:action="@{/register}" th:object="${registerForm}" method="post">
+            <form th:action="@{/register}" th:object="${registerForm}" method="post" class="auth-form">
+                <div class="form-group">
+                    <label for="displayName">表示名</label>
+                    <input type="text" id="displayName" th:field="*{displayName}" placeholder="ニックネームを入力">
+                    <span class="error-message" th:if="${#fields.hasErrors('displayName')}" th:errors="*{displayName}"></span>
+                </div>
 
-    <div>
-        名前:
-        <input type="text" th:field="*{displayName}">
-        <p th:errors="*{displayName}"></p>
-    </div>
+                <div class="form-group">
+                    <label for="email">メールアドレス</label>
+                    <input type="email" id="email" th:field="*{email}" placeholder="example@kotan.com">
+                    <span class="error-message" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                </div>
 
-    <div>
-        Email:
-        <input type="email" th:field="*{email}">
-        <p th:errors="*{email}"></p>
-    </div>
+                <div class="form-group">
+                    <label for="password">パスワード</label>
+                    <input type="password" id="password" th:field="*{password}" placeholder="8文字以上の半角英数">
+                    <span class="error-message" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                </div>
 
-    <div>
-        Password:
-        <input type="password" th:field="*{password}">
-        <p th:errors="*{password}"></p>
-    </div>
+                <button type="submit" class="btn-auth">アカウントを作成する</button>
+            </form>
 
-    <button type="submit">登録</button>
+            <div class="auth-footer">
+                すでにアカウントをお持ちですか？ <a th:href="@{/login}">ログイン</a>
+            </div>
+        </div>
+    </main>
 
-</form>
-
-<a th:href="@{/login}">ログインへ</a>
-
+    <!-- フッターの挿入 -->
+    <div th:replace="~{layout/_footer :: footer}"></div>
 </body>
+
 </html>
