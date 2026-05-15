@@ -20,6 +20,36 @@
             weight
         FROM products
     </select>
+    
+    <!-- 商品検索 -->
+    <select id="search" resultType="com.example.demo.entity.Product">
+        SELECT
+            id,
+            category_id,
+            name,
+            description,
+            price,
+            image_url,
+            item_type,
+            stock,
+            growth_days,
+            weight
+        FROM products
+        <where>
+            <if test="keyword != null and keyword != ''">
+                AND (name LIKE CONCAT('%', #{keyword}, '%') OR description LIKE CONCAT('%', #{keyword}, '%'))
+            </if>
+            <if test="categoryId != null">
+                AND category_id = #{categoryId}
+            </if>
+            <if test="minPrice != null">
+                AND price &gt;= #{minPrice}
+            </if>
+            <if test="maxPrice != null">
+                AND price &lt;= #{maxPrice}
+            </if>
+        </where>
+    </select>
 
     <!-- 商品詳細 -->
     <select id="findById" parameterType="Integer" resultType="com.example.demo.entity.Product">

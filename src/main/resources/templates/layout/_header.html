@@ -12,7 +12,19 @@
         </div>
 
         <div class="right-header">
-            <input type="text" placeholder="Search" class="search-box">
+            <form th:action="@{/products}" method="get" class="search-form">
+                <div class="search-container">
+                    <select name="categoryId" class="header-category-select">
+                        <option value="">全カテゴリ</option>
+                        <option value="1" th:selected="${param.categoryId == '1'}">農産物</option>
+                        <option value="2" th:selected="${param.categoryId == '2'}">水産物</option>
+                        <option value="3" th:selected="${param.categoryId == '3'}">畜産物</option>
+                        <option value="4" th:selected="${param.categoryId == '4'}">その他</option>
+                    </select>
+                    <input type="text" name="keyword" placeholder="Search" class="search-box" th:value="${param.keyword}">
+                    <button type="submit" class="search-icon-btn">🔍</button>
+                </div>
+            </form>
             <a th:href="@{/account}" class="icon" title="アカウント情報">
                 <img th:src="@{/images/user_icon.png}" alt="Account" class="user-icon-img">
             </a>

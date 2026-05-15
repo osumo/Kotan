@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Product;
 import com.example.demo.service.ProductService;
@@ -23,8 +24,13 @@ public class ProductController {
 
 	//商品一覧
 	@GetMapping("/products")
-	public String products(Model model) {
-		List<Product> products = productService.getProducts();
+	public String products(
+			@RequestParam(required = false) String keyword,
+			@RequestParam(required = false) Integer categoryId,
+			@RequestParam(required = false) Integer minPrice,
+			@RequestParam(required = false) Integer maxPrice,
+			Model model) {
+		List<Product> products = productService.searchProducts(keyword, categoryId, minPrice, maxPrice);
 		model.addAttribute("products", products);
 		return "products";
 	}

@@ -14,6 +14,51 @@
     <main class="container">
         <h1 class="title">商品一覧</h1>
         
+        <!-- 絞り込みセクション -->
+        <div class="filter-section">
+            <form th:action="@{/products}" method="get" class="filter-form">
+                <!-- 検索キーワードを保持 -->
+                <input type="hidden" name="keyword" th:value="${param.keyword}">
+                
+                <div class="filter-group">
+                    <label for="categoryId">カテゴリ</label>
+                    <select name="categoryId" id="categoryId" class="filter-select">
+                        <option value="">全カテゴリ</option>
+                        <option value="1" th:selected="${param.categoryId == '1'}">農産物</option>
+                        <option value="2" th:selected="${param.categoryId == '2'}">水産物</option>
+                        <option value="3" th:selected="${param.categoryId == '3'}">畜産物</option>
+                        <option value="4" th:selected="${param.categoryId == '4'}">その他</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>価格範囲</label>
+                    <div class="price-range-container">
+                        <select name="minPrice" class="filter-select mini">
+                            <option value="">下限なし</option>
+                            <option value="100" th:selected="${param.minPrice == '100'}">100円</option>
+                            <option value="500" th:selected="${param.minPrice == '500'}">500円</option>
+                            <option value="1000" th:selected="${param.minPrice == '1000'}">1,000円</option>
+                            <option value="5000" th:selected="${param.minPrice == '5000'}">5,000円</option>
+                            <option value="10000" th:selected="${param.minPrice == '10000'}">10,000円</option>
+                        </select>
+                        <span class="range-separator">〜</span>
+                        <select name="maxPrice" class="filter-select mini">
+                            <option value="">上限なし</option>
+                            <option value="1000" th:selected="${param.maxPrice == '1000'}">1,000円</option>
+                            <option value="5000" th:selected="${param.maxPrice == '5000'}">5,000円</option>
+                            <option value="10000" th:selected="${param.maxPrice == '10000'}">10,000円</option>
+                            <option value="50000" th:selected="${param.maxPrice == '50000'}">50,000円</option>
+                            <option value="100000" th:selected="${param.maxPrice == '100000'}">100,000円</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button type="submit" class="filter-btn">絞り込む</button>
+                <a th:href="@{/products}" class="filter-reset">リセット</a>
+            </form>
+        </div>
+        
         <div class="product-grid">
             <a th:href="'/product/' + ${product.id}" class="product-card" th:each="product : ${products}">
                 <img th:src="${product.imageUrl}" alt="商品画像" class="product-image">
