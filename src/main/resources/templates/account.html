@@ -44,6 +44,31 @@
                 </div>
             </div>
         </div>
+
+        <!-- 所持クーポンセクション -->
+        <div class="coupons-section">
+            <h2 class="section-title">所持クーポン</h2>
+            <div th:if="${#lists.isEmpty(userCoupons)}" class="no-coupons">
+                所持しているクーポンはありません。
+            </div>
+            <div th:unless="${#lists.isEmpty(userCoupons)}" class="coupons-grid">
+                <div th:each="userCoupon : ${userCoupons}" class="coupon-card">
+                    <div class="coupon-header-mini">
+                        <span class="discount-badge" th:text="${userCoupon.discountRate + '% OFF'}">10% OFF</span>
+                        <h3 class="coupon-name" th:text="${userCoupon.name}">クーポン名</h3>
+                    </div>
+                    <div class="coupon-body-mini">
+                        <p class="coupon-code">コード: <span th:text="${userCoupon.code}">CODE123</span></p>
+                        <p class="coupon-min-amount" th:if="${userCoupon.minAmount > 0}">
+                            ※¥<span th:text="${#numbers.formatDecimal(userCoupon.minAmount, 0, 'COMMA', 0, 'POINT')}">1,000</span>以上の注文で利用可能
+                        </p>
+                        <p class="coupon-expiry">
+                            期限: <span th:text="${#temporals.format(userCoupon.expireAt, 'yyyy/MM/dd')}">2024/12/31</span>まで
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <!-- フッターの挿入 -->

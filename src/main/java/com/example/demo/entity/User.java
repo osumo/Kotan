@@ -2,45 +2,76 @@ package com.example.demo.entity;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.Table;
-
-import lombok.Data;
-
-@Entity
-@Table(name = "users")
-@Data
 public class User {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-
-	@Column(nullable = false, unique = true)
 	private String email;
-
-	@Column(nullable = false)
 	private String password;
-
-	@Column(name = "display_name")
 	private String displayName;
-
-	@Column(name = "total_spent")
-	private Integer totalSpent = 0;
-
-	@Column(name = "converted_spent")
-	private Integer convertedSpent = 0;
-
-	@Column(name = "created_at")
+	private Integer totalSpent;
+	private Integer convertedSpent;
 	private LocalDateTime createdAt;
 
-	@PrePersist
-	public void prePersist() {
-		createdAt = LocalDateTime.now();
+	// Constructor
+	public User() {
+		this.totalSpent = 0;
+		this.convertedSpent = 0;
+	}
+
+	// Getter and Setter
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
+	}
+
+	public Integer getTotalSpent() {
+		return totalSpent;
+	}
+
+	public void setTotalSpent(Integer totalSpent) {
+		this.totalSpent = totalSpent;
+	}
+
+	public Integer getConvertedSpent() {
+		return convertedSpent;
+	}
+
+	public void setConvertedSpent(Integer convertedSpent) {
+		this.convertedSpent = convertedSpent;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
 	}
 }

@@ -14,17 +14,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.User;
+import com.example.demo.entity.UserCoupon;
 import com.example.demo.form.LoginForm;
 import com.example.demo.form.RegisterForm;
-import com.example.demo.repository.UserRepository;
+import com.example.demo.mapper.UserCouponMapper;
+import com.example.demo.mapper.UserMapper;
 
-import lombok.RequiredArgsConstructor;
+import java.util.List;
 
 @Controller
-@RequiredArgsConstructor
 public class AuthController {
 
-	private final UserRepository userRepository;
+	private final UserMapper userMapper;
+	private final UserCouponMapper userCouponMapper;
+
+	// Constructor Injection
+	public AuthController(UserMapper userMapper, UserCouponMapper userCouponMapper) {
+		this.userMapper = userMapper;
+		this.userCouponMapper = userCouponMapper;
+	}
 
 	// =========================
 	// ユーザー登録
@@ -46,7 +54,7 @@ public class AuthController {
 			Model model) {
 
 		// メール重複チェック
-		if (userRepository.findByEmail(registerForm.getEmail()).isPresent()) {
+		if (userMapper.findByEmail(registerForm.getEmail()).isPresent()) {
 			result.rejectValue(
 					"email",
 					"error.email",
@@ -64,7 +72,7 @@ public class AuthController {
 		// 本来はPasswordEncoder推奨
 		user.setPassword(registerForm.getPassword());
 
-		userRepository.save(user);
+		userMapper.insert(user);
 
 		redirectAttributes.addFlashAttribute("successMessage", "アカウントが正常に作成されました。ログインしてください。");
 
@@ -94,7 +102,7 @@ public class AuthController {
 			return "login";
 		}
 
-		Optional<User> optionalUser = userRepository.findByEmail(loginForm.getEmail());
+		Optional<User> optionalUser = userMapper.findByEmail(loginForm.getEmail());
 
 		if (optionalUser.isEmpty()) {
 
@@ -131,7 +139,11 @@ public class AuthController {
 			return "redirect:/login";
 		}
 
+		// MyBatisのMapperを使用してデータを取得
+		List<UserCoupon> userCoupons = userCouponMapper.findByUserId(loginUser.getId());
+
 		model.addAttribute("user", loginUser);
+		model.addAttribute("userCoupons", userCoupons);
 
 		return "account";
 	}
