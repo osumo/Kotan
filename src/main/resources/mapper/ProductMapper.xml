@@ -5,13 +5,37 @@
 
 <mapper namespace="com.example.demo.mapper.ProductMapper">
 
+    <!-- 商品一覧 -->
     <select id="findAll" resultType="com.example.demo.entity.Product">
-        SELECT * FROM products
+        SELECT
+            id,
+            category_id,
+            name,
+            description,
+            price,
+            image_url,
+            item_type,
+            stock,
+            growth_days,
+            weight
+        FROM products
     </select>
 
-    <select id="findById" parameterType="int" resultType="com.example.demo.entity.Product">
-        SELECT * FROM products WHERE id = #{id}
+    <!-- 商品詳細 -->
+    <select id="findById" parameterType="Integer" resultType="com.example.demo.entity.Product">
+        SELECT
+            id,
+            category_id,
+            name,
+            description,
+            price,
+            image_url,
+            item_type,
+            stock,
+            growth_days,
+            weight
+        FROM products
+        WHERE id = #{id}
     </select>
-
 
 </mapper>
