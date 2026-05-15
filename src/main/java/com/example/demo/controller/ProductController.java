@@ -1,20 +1,36 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import com.example.demo.entity.Product;
+import com.example.demo.service.ProductService;
 
 @Controller
 public class ProductController {
 
-    // 担当者: D
-    // 目的: 商品一覧ページの表示
-    // 補足: DBから全商品(または条件に合う商品)のリストを取得し、Modelに詰める処理が今後必要です。
-    //      一覧表示のためのループ処理(th:each)をビュー側で使えるようにList型のデータを渡してください。
-    @GetMapping("/products")
-    public String products() {
-        return "products";
-    }
+	// ←ここ（フィールド）
+	private final ProductService productService;
+
+	// ←ここ（コンストラクタ）
+	public ProductController(ProductService productService) {
+		this.productService = productService;
+	}
+
+	// 担当者: D
+	// 目的: 商品一覧ページの表示
+	// 補足: DBから全商品(または条件に合う商品)のリストを取得し、Modelに詰める処理が今後必要です。
+	//      一覧表示のためのループ処理(th:each)をビュー側で使えるようにList型のデータを渡してください。
+	@GetMapping("/products")
+	public String products(Model model) {
+		List<Product> products = productService.getProducts();
+		model.addAttribute("products", products);
+		return "products";
+	}
 
     // 担当者: D
     // 目的: 商品詳細ページの表示
