@@ -59,6 +59,7 @@ CREATE TABLE products (
     weight REAL DEFAULT 0,
     growth_days INTEGER DEFAULT 0,
     stock INTEGER DEFAULT 0
+    
 );
 
 -- 3. ユーザー所持・配置系
