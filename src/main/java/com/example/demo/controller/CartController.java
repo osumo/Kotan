@@ -53,6 +53,14 @@ public class CartController {
         return "redirect:/cart";
     }
 
+    @PostMapping("/cart/update")
+    public String updateQuantity(@RequestParam("productId") Integer productId, @RequestParam("delta") int delta) {
+        Cart cart = getCartFromSession();
+        cart.updateQuantity(productId, delta);
+        session.setAttribute("cart", cart);
+        return "redirect:/cart";
+    }
+
     private Cart getCartFromSession() {
         Cart cart = (Cart) session.getAttribute("cart");
         if (cart == null) {

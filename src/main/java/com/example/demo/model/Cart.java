@@ -22,6 +22,18 @@ public class Cart {
         items.removeIf(item -> item.getProductId().equals(productId));
     }
 
+    public void updateQuantity(Integer productId, int delta) {
+        for (CartItem item : items) {
+            if (item.getProductId().equals(productId)) {
+                item.setQuantity(item.getQuantity() + delta);
+                if (item.getQuantity() <= 0) {
+                    removeItem(productId);
+                }
+                return;
+            }
+        }
+    }
+
     public int getTotalPrice() {
         return items.stream().mapToInt(CartItem::getSubtotal).sum();
     }

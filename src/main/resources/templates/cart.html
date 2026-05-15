@@ -45,6 +45,22 @@
             border-radius: 4px;
             cursor: pointer;
         }
+        .qty-btn {
+            background: #eee;
+            border: 1px solid #ccc;
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+        .qty-btn:hover {
+            background: #ddd;
+        }
         .checkout-container {
             display: flex;
             justify-content: space-between;
@@ -82,7 +98,23 @@
                         <td><img th:src="${item.imageUrl}" width="60" style="border-radius: 4px;"></td>
                         <td th:text="${item.name}">商品名</td>
                         <td th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')} + '円'">価格</td>
-                        <td th:text="${item.quantity}">数量</td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <form th:action="@{/cart/update}" method="post">
+                                    <input type="hidden" name="productId" th:value="${item.productId}">
+                                    <input type="hidden" name="delta" value="-1">
+                                    <button type="submit" class="qty-btn">−</button>
+                                </form>
+                                
+                                <span th:text="${item.quantity}" style="font-weight: bold; min-width: 20px; text-align: center;">数量</span>
+                                
+                                <form th:action="@{/cart/update}" method="post">
+                                    <input type="hidden" name="productId" th:value="${item.productId}">
+                                    <input type="hidden" name="delta" value="1">
+                                    <button type="submit" class="qty-btn">+</button>
+                                </form>
+                            </div>
+                        </td>
                         <td th:text="${#numbers.formatDecimal(item.subtotal, 0, 'COMMA', 0, 'POINT')} + '円'">小計</td>
                         <td>
                             <form th:action="@{/cart/remove}" method="post">
