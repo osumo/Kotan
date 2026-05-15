@@ -527,9 +527,20 @@ footer {
     font-size: 14px;
 }
 
-.dual-range-slider {
+.filter-select.mini {
+    min-width: 110px;
+}
+
+.price-range-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    min-width: 250px;
+}
+
+.slider-container {
     position: relative;
-    width: 300px;
     height: 40px;
     display: flex;
     align-items: center;
@@ -544,50 +555,73 @@ footer {
     z-index: 1;
 }
 
-.dual-range-slider input[type="range"] {
+.slider-range {
+    position: absolute;
+    height: 6px;
+    background-color: #333;
+    border-radius: 3px;
+    z-index: 2;
+}
+
+input[type="range"].price-slider {
     position: absolute;
     width: 100%;
+    height: 0;
+    -webkit-appearance: none;
     background: none;
     pointer-events: none;
-    -webkit-appearance: none;
-    appearance: none;
-    z-index: 2;
-    margin: 0;
+    z-index: 3;
+    outline: none;
 }
 
-.dual-range-slider input[type="range"]::-webkit-slider-thumb {
-    height: 20px;
-    width: 20px;
+input[type="range"].price-slider::-webkit-slider-thumb {
+    height: 18px;
+    width: 18px;
     border-radius: 50%;
-    background-color: #333;
+    background-color: white;
+    border: 2px solid #333;
+    cursor: pointer;
+    -webkit-appearance: none;
+    pointer-events: auto;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+input[type="range"].price-slider::-moz-range-thumb {
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background-color: white;
+    border: 2px solid #333;
     cursor: pointer;
     pointer-events: auto;
-    -webkit-appearance: none;
-    box-shadow: 0 0 5px rgba(0,0,0,0.2);
-    border: 2px solid white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-.dual-range-slider input[type="range"]::-moz-range-thumb {
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    background-color: #333;
-    cursor: pointer;
-    pointer-events: auto;
-    border: 2px solid white;
-    box-shadow: 0 0 5px rgba(0,0,0,0.2);
-}
-
-.slider-group label {
+.price-values {
     display: flex;
     justify-content: space-between;
-    width: 100%;
-    min-width: 300px;
+    font-size: 13px;
+    color: #666;
+    font-weight: bold;
 }
 
-#price-display {
-    color: #333;
-    font-weight: bold;
+/* ヘッダー用スライダーのコンパクト化 */
+.header-filters .price-range-container {
+    min-width: 150px;
+    gap: 2px;
+}
+
+.header-filters .slider-container {
+    height: 25px;
+}
+
+.header-filters .price-values {
+    font-size: 10px;
+}
+
+.header-filters input[type="range"].price-slider::-webkit-slider-thumb {
+    height: 12px;
+    width: 12px;
 }
 
 .filter-btn {
