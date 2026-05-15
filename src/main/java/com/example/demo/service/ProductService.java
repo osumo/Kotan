@@ -20,6 +20,10 @@ public class ProductService {
 		return productMapper.findAll();
 	}
 
+	public List<Product> searchProducts(String keyword, Integer categoryId, Integer minPrice, Integer maxPrice) {
+		return productMapper.search(keyword, categoryId, minPrice, maxPrice);
+	}
+
 	public Product getProductById(Integer id) {
 		return productMapper.findById(id);
 	}
