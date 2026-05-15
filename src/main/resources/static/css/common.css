@@ -325,6 +325,31 @@ body.sidebar-open .play-area-nav {
     border-color: #b0d4f1;
 }
 
+/* ===== 各ボタン色 ===== */
+.play-area-btn.garden {
+    background-color: #7ed957; /* 緑 */
+    color: white;
+    border-color: #7ed957;
+}
+
+.play-area-btn.aquarium {
+    background-color: #0b63c7; /* 青 */
+    color: white;
+    border-color: #0b63c7;
+}
+
+.play-area-btn.farm {
+    background-color: #ff8a80; /* 赤 */
+    color: white;
+    border-color: #ff8a80;
+}
+
+.play-area-btn.room {
+    background-color: #d18b4a; /* 茶 */
+    color: white;
+    border-color: #d18b4a;
+}
+
 /* ===== フッター ===== */
 footer {
     background-color: #333;
