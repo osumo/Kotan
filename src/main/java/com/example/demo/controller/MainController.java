@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -11,8 +12,11 @@ public class MainController {
     // 補足: 初期表示に必要なデータ(ユーザーの部屋情報など)をModelに詰める処理が今後必要です。
     //      ログイン状態をチェックし、未ログインならログイン画面へリダイレクトする処理も考慮してください。
     @GetMapping("/")
-    public String index() {
-        return "index";
+    public String index(HttpSession session) {
+        if (session.getAttribute("loginUser") != null) {
+            return "index";
+        }
+        return "redirect:/login";
     }
 
     // 担当者: C
