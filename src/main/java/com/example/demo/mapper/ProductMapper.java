@@ -13,5 +13,5 @@ public interface ProductMapper {
 	List<Product> findAll();
 
 	/** IDで商品を1件取得する */
-	Product findById(int id);
+	Product findById(Integer id);
 }

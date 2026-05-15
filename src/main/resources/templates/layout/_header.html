@@ -13,7 +13,9 @@
 
         <div class="right-header">
             <input type="text" placeholder="Search" class="search-box">
-            <div class="icon">⚪</div>
+            <a th:href="@{/account}" class="icon" title="アカウント情報">
+                <img th:src="@{/images/user_icon.png}" alt="Account" class="user-icon-img">
+            </a>
         </div>
 
         <!-- サイドバーメニュー -->
@@ -26,7 +28,9 @@
             <!-- ユーザー情報表示 -->
             <div class="user-info">
                 <span class="user-greeting" th:text="'ようこそ ' + (${session.loginUser != null ? session.loginUser.displayName : 'ゲスト'}) + ' さん'">ようこそゲストさん</span>
-                <a th:href="@{/account}" class="account-link" title="アカウント情報">⚪</a>
+                <a th:href="@{/account}" class="account-link" title="アカウント情報">
+                    <img th:src="@{/images/user_icon.png}" alt="Account" class="user-icon-img">
+                </a>
             </div>
 
             <nav class="sidebar-content">
@@ -41,9 +45,10 @@
                     <li class="sub-menu"><a th:href="@{/garden}">GARDEN</a></li>
                     <li class="sub-menu"><a th:href="@{/aquarium}">AQUARIUM</a></li>
                     <li class="sub-menu"><a th:href="@{/farm}">FARM</a></li>
-
-                    <li style="margin-top: 20px;" th:if="${session.loginUser != null}">
-                        <a th:href="@{/logout}" style="color: #ff4d4d; font-weight: bold;">ログアウト</a>
+                    <li class="sub-menu logout-item" th:if="${session.loginUser != null}">
+                        <a th:href="@{/logout}" class="logout-link">
+                            <span class="logout-icon">⏻</span> ログアウト
+                        </a>
                     </li>
                 </ul>
             </nav>

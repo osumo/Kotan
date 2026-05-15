@@ -133,6 +133,20 @@ header {
 .icon {
     font-size: 26px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.user-icon-img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform 0.2s;
+}
+
+.user-icon-img:hover {
+    transform: scale(1.1);
 }
 
 /* ===== ハンバーガーメニュー ===== */
@@ -205,6 +219,37 @@ header {
     letter-spacing: 1px;
 }
 
+/* ログアウトボタンのプレミアムスタイル */
+.logout-item {
+    margin-top: 25px !important;
+    border-bottom: none !important;
+}
+
+.logout-link {
+    color: #e74c3c !important; /* 洗練された赤 */
+    font-weight: bold;
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px !important;
+    background-color: #fdf2f2;
+    border-radius: 8px;
+    transition: all 0.2s ease !important;
+    border: 1px solid #fadbd8;
+    font-size: 16px !important;
+}
+
+.logout-link:hover {
+    background-color: #fce4e4 !important;
+    border-color: #f5b7b1;
+    transform: translateX(5px);
+    box-shadow: 2px 2px 5px rgba(231, 76, 60, 0.1);
+}
+
+.logout-icon {
+    font-size: 18px;
+}
+
 /* オーバーレイ */
 .overlay {
     position: fixed;
@@ -238,15 +283,11 @@ header {
 }
 
 .account-link {
-    font-size: 24px;
     text-decoration: none;
     color: #333;
     cursor: pointer;
-    transition: transform 0.2s;
-}
-
-.account-link:hover {
-    transform: scale(1.1);
+    display: flex;
+    align-items: center;
 }
 
 /* プレイエリアボタン (左側に縦に並べる) */
