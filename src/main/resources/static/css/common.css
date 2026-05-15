@@ -21,7 +21,7 @@ body.sidebar-open {
 .container {
     width: 100%;
     max-width: 1200px;
-    margin: 60px auto;
+    margin: 30px auto;
     padding: 0 20px 0 160px; /* 左側にボタン用のスペース(140px + α)を確保 */
     min-height: calc(100vh - 300px); /* フッターを下に押しやるため */
 }

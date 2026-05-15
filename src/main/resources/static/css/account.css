@@ -1,7 +1,7 @@
 /* Account Page Styling */
 
 .account-page {
-    padding: 40px 0;
+    padding: 10px 0;
 }
 
 .profile-card {
@@ -9,7 +9,7 @@
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     overflow: hidden;
-    max-width: 800px;
+    max-width: 600px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -17,7 +17,7 @@
 
 .profile-header {
     background: linear-gradient(135deg, #d9ecfb 0%, #b0d4f1 100%);
-    padding: 40px;
+    padding: 20px;
     text-align: center;
     color: #333;
 }
@@ -36,9 +36,9 @@
 }
 
 .profile-name {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 700;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
 }
 
 .profile-email {
@@ -47,14 +47,14 @@
 }
 
 .profile-body {
-    padding: 40px;
+    padding: 20px 30px;
 }
 
 .stats-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 40px;
+    gap: 15px;
+    margin-bottom: 25px;
 }
 
 .stat-item {
