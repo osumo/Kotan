@@ -1,0 +1,28 @@
+.product-detail-container {
+           display: flex;
+           gap: 40px;
+           background: white;
+           padding: 30px;
+           border-radius: 12px;
+           box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+           margin-top: 30px;
+       }
+       .product-image {
+           max-width: 400px;
+           border-radius: 8px;
+           object-fit: cover;
+       }
+       .product-info {
+           flex: 1;
+       }
+       .price-tag {
+           font-size: 28px;
+           font-weight: bold;
+           color: #333;
+           margin: 20px 0;
+       }
+       .description {
+           color: #666;
+           line-height: 1.8;
+           margin-bottom: 30px;
+       }

@@ -37,14 +37,12 @@ INSERT INTO products (category_id, name, description, price, image_url, item_typ
 (3, '十勝和牛 ステーキ用', 'とろけるような食感の和牛です。', 12000, '/images/wagyu_steak.png', 'FOOD', 30, 0, 0),
 -- その他・家具
 (4, '木製の机', 'シンプルで使いやすい家具です。', 5000, '/images/desk.png', 'FURNITURE', 0, 0, 0),
-(4, '雪だるまの置物', '冬にぴったりの可愛い置物です。', 2000, '/images/snowman.png', 'FURNITURE', 0, 0, 0),
-(4, 'ガチャコイン', 'メタバース内でガチャが回せます。', 0, '/images/coin.png', 'OTHER', 0, 0, 0);
+(4, '雪だるまの置物', '冬にぴったりの可愛い置物です。', 2000, '/images/snowman.png', 'FURNITURE', 0, 0, 0);
 
 -- 6. inventory
 INSERT INTO inventory (user_id, product_id, quantity) VALUES
 (1, 2, 5),
 (1, 6, 1),
-(1, 8, 10),
 (2, 4, 3);
 
 -- 7. room_placements
@@ -61,7 +59,7 @@ INSERT INTO aquarium_events (title, target_weight, current_weight, end_at) VALUE
 
 -- 10. achievements
 INSERT INTO achievements (title, description, reward_product_id) VALUES
-('最初の一歩', '初めてログインする', 8),
+('最初の一歩', '初めてログインする', 6), -- 机を報酬に変更
 ('庭師の卵', '初めて種を植える', 6),
 ('爆買い王', '累計購入金額が10,000円を突破', 7);
 
