@@ -389,74 +389,105 @@ footer {
 }
 
 .search-container {
-    position: relative;
     display: flex;
     align-items: center;
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 50px; /* 角を丸くしてモダンに */
+    padding: 2px 5px 2px 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: all 0.3s ease;
+}
+
+.search-container:focus-within {
+    border-color: #b0d4f1;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
 
 .header-filters {
     display: flex;
     align-items: center;
-    background-color: #f8f9fa;
-    border: 1px solid #ccc;
-    border-right: none;
-    border-radius: 4px 0 0 4px;
+    gap: 5px;
 }
 
 .header-select {
-    height: 35px;
-    border: 1px solid #ccc;
-    border-right: none;
-    padding: 0 5px 0 10px;
-    background-color: #f8f9fa;
+    height: 32px;
+    border: none;
+    background-color: transparent;
     font-size: 13px;
-    color: #555;
+    color: #666;
     cursor: pointer;
     outline: none;
-    transition: background-color 0.2s;
-}
-
-/* header-filters内にあるセレクトは枠線を消して一体化させる */
-.header-filters .header-select {
-    border: none;
-}
-
-.header-select.mini {
-    min-width: 60px;
-    padding-right: 0;
-}
-
-.header-separator {
-    font-size: 12px;
-    color: #999;
+    padding: 0 5px;
 }
 
 .header-select:hover {
-    background-color: #f0f1f2;
+    color: #333;
+}
+
+.header-select.mini {
+    min-width: 70px;
+}
+
+/* 項目間の区切り線 */
+.header-filters::after,
+.header-select[name="categoryId"]::after {
+    content: "";
+    height: 18px;
+    width: 1px;
+    background-color: #eee;
+    margin: 0 10px;
+}
+
+/* select自体の後の線を出すために、直後の要素にマージンをつける等の調整が必要なため、
+   実態に合わせて以下のようにセパレーターを定義し直します */
+
+.header-separator {
+    font-size: 11px;
+    color: #ccc;
+    margin: 0 2px;
+}
+
+.header-divider {
+    width: 1px;
+    height: 20px;
+    background-color: #eee;
+    margin: 0 12px;
 }
 
 .search-container .search-box {
-    width: 150px;
-    border-radius: 0 4px 4px 0;
+    border: none;
+    height: 36px;
+    width: 180px;
+    padding-left: 5px;
+    font-size: 14px;
+    background-color: transparent;
+    outline: none;
 }
 
 .search-icon-btn {
-    position: absolute;
-    right: 10px;
-    background: none;
+    width: 34px;
+    height: 34px;
+    background-color: #333;
+    color: white;
     border: none;
+    border-radius: 50%;
     cursor: pointer;
-    font-size: 18px;
-    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #888;
-    transition: color 0.2s;
+    font-size: 16px;
+    transition: background-color 0.2s, transform 0.1s;
+    margin-left: 5px;
 }
 
 .search-icon-btn:hover {
-    color: #333;
+    background-color: #555;
+    transform: scale(1.05);
+}
+
+.search-icon-btn:active {
+    transform: scale(0.95);
 }
 
 .filter-section {
