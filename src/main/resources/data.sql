@@ -1,10 +1,11 @@
 -- Kotan Test Data
 
 -- 1. users
-INSERT INTO users (email, password, display_name, total_spent, converted_spent) VALUES
-('test@example.com', '$2a$10$vW9mYh4wF.S.mU.zUuGv.e', 'テストユーザー', 5000, 3000),
-('user2@example.com', '$2a$10$vW9mYh4wF.S.mU.zUuGv.e', 'サトシ', 12000, 10000),
-('aaa@example.com', 'aaa', 'AAA', 0, 0);
+INSERT INTO users (email, password, display_name, postal_code, address, phone_number, total_spent, converted_spent) VALUES
+('test@example.com', '$2a$10$vW9mYh4wF.S.mU.zUuGv.e', 'テストユーザー', '100-0001', '東京都千代田区千代田1-1', '090-1234-5678', 5000, 3000),
+('user2@example.com', '$2a$10$vW9mYh4wF.S.mU.zUuGv.e', 'サトシ', '060-0808', '北海道札幌市北区北8条西5丁目', '080-9876-5432', 12000, 10000),
+('aaa@example.com', 'aaa', 'AAA', '530-0001', '大阪府大阪市北区梅田1-1-1', '06-1234-5678', 0, 0),
+('hba.masumura@gmail.com', 'aaa', 'マスムラ', '150-0002', '東京都渋谷区渋谷2-2-2', '090-9999-8888', 25000, 15000);
 
 -- 2. categories
 INSERT INTO categories (name) VALUES
@@ -23,7 +24,10 @@ INSERT INTO coupons (code, name, discount_rate, min_amount) VALUES
 INSERT INTO user_coupons (user_id, coupon_id, expire_at) VALUES
 (1, 1, '2026-12-31 23:59:59'),
 (1, 3, '2026-06-30 23:59:59'),
-(2, 2, '2026-12-31 23:59:59');
+(2, 2, '2026-12-31 23:59:59'),
+(3, 1, '2026-12-31 23:59:59'),
+(4, 1, '2026-12-31 23:59:59'),
+(4, 2, '2026-12-31 23:59:59');
 
 -- 5. products
 INSERT INTO products (category_id, name, description, price, image_url, item_type, stock, growth_days, weight) VALUES

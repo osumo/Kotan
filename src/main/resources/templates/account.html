@@ -45,6 +45,32 @@
             </div>
         </div>
 
+        <!-- お届け先情報登録・編集セクション -->
+        <div class="address-section">
+            <h2 class="section-title">📍 お届け先情報の登録・編集</h2>
+            <div th:if="${successMessage}" class="alert-success" th:text="${successMessage}">
+                更新に成功しました
+            </div>
+            
+            <form th:action="@{/account/address}" method="post" class="address-form glass-card">
+                <div class="form-group">
+                    <label for="postalCode">郵便番号</label>
+                    <input type="text" id="postalCode" name="postalCode" th:value="${user.postalCode}" placeholder="123-4567" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">住所</label>
+                    <input type="text" id="address" name="address" th:value="${user.address}" placeholder="東京都千代田区..." required>
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">電話番号</label>
+                    <input type="text" id="phoneNumber" name="phoneNumber" th:value="${user.phoneNumber}" placeholder="090-1234-5678" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-save">登録情報を更新する</button>
+                </div>
+            </form>
+        </div>
+
         <!-- 所持クーポンセクション -->
         <div class="coupons-section">
             <h2 class="section-title">所持クーポン</h2>

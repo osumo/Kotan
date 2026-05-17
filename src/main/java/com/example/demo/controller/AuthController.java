@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.User;
@@ -146,6 +147,31 @@ public class AuthController {
 		model.addAttribute("userCoupons", userCoupons);
 
 		return "account";
+	}
+
+	@PostMapping("/account/address")
+	public String updateAddress(
+			@RequestParam("postalCode") String postalCode,
+			@RequestParam("address") String address,
+			@RequestParam("phoneNumber") String phoneNumber,
+			HttpSession session,
+			RedirectAttributes redirectAttributes) {
+
+		User loginUser = (User) session.getAttribute("loginUser");
+		if (loginUser == null) {
+			return "redirect:/login";
+		}
+
+		loginUser.setPostalCode(postalCode);
+		loginUser.setAddress(address);
+		loginUser.setPhoneNumber(phoneNumber);
+
+		userMapper.updateAddressInfo(loginUser);
+		session.setAttribute("loginUser", loginUser); // Sync session
+
+		redirectAttributes.addFlashAttribute("successMessage", "お届け先情報を更新しました。");
+
+		return "redirect:/account";
 	}
 
 	// =========================

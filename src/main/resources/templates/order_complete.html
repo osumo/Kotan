@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ご注文完了 - KOTAN</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/order.css}">
+</head>
+<body>
+    <div th:replace="~{layout/_header :: header}"></div>
+
+    <main class="container complete-container">
+        <!-- Celebration Circle Animation -->
+        <div class="success-icon-wrapper">
+            <div class="success-icon">🎉</div>
+        </div>
+
+        <h1 class="complete-title">ご注文の仮受付が完了しました！</h1>
+        
+        <div class="glass-card complete-card">
+            <p class="complete-message">
+                ご注文の仮受付が完了いたしました。<br>
+                ご登録のメールアドレス宛に、安全な決済手続きを進めるための<strong>「お支払い承認メール」</strong>を送信いたしました。実際にメールボックスを開き、メール内の<strong>「【OK】購入手続きを完了する」</strong>リンクをクリックして、決済とご注文手続きを最終完了させてください。
+            </p>
+
+            <div class="order-info-box" th:if="${orderNo != null}">
+                <div class="info-row">
+                    <span class="info-label">注文番号</span>
+                    <span class="info-value" th:text="${orderNo}">KT-123456-789</span>
+                </div>
+                <div class="info-row" th:if="${finalTotalPrice != null}">
+                    <span class="info-label">お支払い合計</span>
+                    <span class="info-value price" th:text="${#numbers.formatDecimal(finalTotalPrice, 0, 'COMMA', 0, 'POINT')} + '円'">0円</span>
+                </div>
+                <div class="info-row" th:if="${address != null}">
+                    <span class="info-label">お届け先住所</span>
+                    <span class="info-value" th:text="${address}">東京都千代田区...</span>
+                </div>
+            </div>
+
+            <div class="email-notice-box">
+                <span class="notice-icon">✉️</span>
+                <p class="notice-text">
+                    <strong>メールが届かない場合</strong><br>
+                    迷惑メールフォルダに振り分けられていないかご確認ください。ご不明点がある場合は、サポート（kotan.ec2026@gmail.com）までお気軽にお問い合わせください。
+                </p>
+            </div>
+        </div>
+
+        <h2 class="navigation-title">引き続きKOTANをお楽しみください</h2>
+        <div class="navigation-grid">
+            <a th:href="@{/products}" class="nav-card shop-card">
+                <span class="nav-icon">🛍️</span>
+                <span class="nav-name">SHOP</span>
+            </a>
+            <a th:href="@{/}" class="nav-card room-card">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-name">ROOM</span>
+            </a>
+            <a th:href="@{/garden}" class="nav-card garden-card">
+                <span class="nav-icon">🌻</span>
+                <span class="nav-name">GARDEN</span>
+            </a>
+            <a th:href="@{/aquarium}" class="nav-card aquarium-card">
+                <span class="nav-icon">🐟</span>
+                <span class="nav-name">AQUARIUM</span>
+            </a>
+            <a th:href="@{/farm}" class="nav-card farm-card">
+                <span class="nav-icon">🌾</span>
+                <span class="nav-name">FARM</span>
+            </a>
+        </div>
+    </main>
+
+    <div th:replace="~{layout/_footer :: footer}"></div>
+</body>
+</html>

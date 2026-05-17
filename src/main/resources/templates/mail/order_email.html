@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>【KOTAN】ご注文ありがとうございました</title>
+    <style th:replace="~{mail/order_email_css :: style}"></style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>KOTAN</h1>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <p class="greeting">
+                <strong th:text="${user.displayName} + ' 様'">テストユーザー 様</strong><br><br>
+                この度は、手作りファームEC「KOTAN」にてご注文いただき、誠にありがとうございました！<br>
+                以下の内容でご注文を受け付けいたしました。
+            </p>
+
+            <!-- Order info -->
+            <div class="order-box">
+                <p><strong>注文番号:</strong> <span th:text="${orderNo}">KT-123456-789</span></p>
+                <p><strong>ご注文日:</strong> <span th:text="${#temporals.format(#temporals.createNow(), 'yyyy年MM月dd日 HH:mm')}">2026年05月17日</span></p>
+                <p><strong>お届け先郵便番号:</strong> <span th:text="${user.postalCode}">100-0001</span></p>
+                <p><strong>お届け先住所:</strong> <span th:text="${user.address}">東京都千代田区...</span></p>
+                <p><strong>お電話番号:</strong> <span th:text="${user.phoneNumber}">090-1234-5678</span></p>
+            </div>
+
+            <!-- Payment instructions -->
+            <div class="payment-box">
+                <h3 class="payment-title">✉️ メール決済承認のお願い</h3>
+                <p class="payment-details">
+                    この度は、KOTANのメールリンク決済をご選択いただきありがとうございます。<br>
+                    ご注文内容をご確認の上、下記の <strong>「【OK】購入手続きを完了する」</strong> ボタンをクリックし、お支払い手続きとご注文の最終確定を完了させてください。
+                </p>
+                <div class="confirm-btn-wrapper">
+                    <a th:href="${confirmUrl}" class="confirm-btn">👉 【OK】購入手続きを完了する</a>
+                </div>
+            </div>
+
+            <!-- Items -->
+            <div class="order-title">ご注文商品明細</div>
+            <table class="item-table">
+                <thead>
+                    <tr>
+                        <th>商品名</th>
+                        <th class="text-right" style="width: 70px;">単価</th>
+                        <th class="text-right" style="width: 50px;">数量</th>
+                        <th class="text-right" style="width: 85px;">小計</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${cart.items}">
+                        <td th:text="${item.name}">じゃがいも</td>
+                        <td class="text-right" th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')} + '円'">2,500円</td>
+                        <td class="text-right" th:text="${item.quantity} + '個'">1個</td>
+                        <td class="text-right" th:text="${#numbers.formatDecimal(item.subtotal, 0, 'COMMA', 0, 'POINT')} + '円'">2,500円</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Summary -->
+            <div class="summary-box">
+                <div class="summary-row">
+                    <span>商品合計</span>
+                    <span th:text="${#numbers.formatDecimal(cart.totalPrice, 0, 'COMMA', 0, 'POINT')} + '円'">0円</span>
+                </div>
+                <div class="summary-row" th:if="${discountAmount > 0}" style="color: #ff4757; font-weight: bold;">
+                    <span>クーポン割引</span>
+                    <span th:text="'-' + ${#numbers.formatDecimal(discountAmount, 0, 'COMMA', 0, 'POINT')} + '円'">-0円</span>
+                </div>
+                <div class="summary-row">
+                    <span>送料</span>
+                    <span>無料</span>
+                </div>
+                <div class="summary-row total">
+                    <span>最終ご請求金額</span>
+                    <span th:text="${#numbers.formatDecimal(finalTotalPrice, 0, 'COMMA', 0, 'POINT')} + '円'">0円</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>※本メールはKOTANシステムから自動送信されています。お心当たりがない場合は破棄してください。</p>
+            <p>&copy; 2026 KOTAN 手作りファームEC. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
