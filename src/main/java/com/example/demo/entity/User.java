@@ -8,6 +8,9 @@ public class User {
 	private String email;
 	private String password;
 	private String displayName;
+	private String postalCode;
+	private String address;
+	private String phoneNumber;
 	private Integer totalSpent;
 	private Integer convertedSpent;
 	private LocalDateTime createdAt;
@@ -73,5 +76,29 @@ public class User {
 
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 }

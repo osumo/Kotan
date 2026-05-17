@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ご購入完了 - KOTAN</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/order.css}">
+</head>
+<body>
+    <div th:replace="~{layout/_header :: header}"></div>
+
+    <main class="container complete-container">
+        <!-- Celebration Circle Animation -->
+        <div class="success-icon-wrapper">
+            <div class="success-icon">✨</div>
+        </div>
+
+        <h1 class="complete-title">ご購入ありがとうございました！</h1>
+        
+        <div class="glass-card complete-card">
+            <p class="complete-message">
+                メールからの決済承認（OK）を確認し、<strong>ご注文手続きがすべて正式に完了</strong>いたしました！<br>
+                お支払い合計金額に基づき、累計購入金額およびゲームポイントがリアルタイムで更新されました。<br>
+                KOTANをご利用いただき、誠にありがとうございました！
+            </p>
+
+            <div class="order-info-box">
+                <div class="info-row">
+                    <span class="info-label">注文番号</span>
+                    <span class="info-value" th:text="${orderNo}">KT-123456-789</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">決済承認金額</span>
+                    <span class="info-value price" th:text="${#numbers.formatDecimal(amount, 0, 'COMMA', 0, 'POINT')} + '円'">0円</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">ステータス</span>
+                    <span class="info-value" style="color: #27ae60; font-weight: bold;">🟢 本完了 (PAID)</span>
+                </div>
+            </div>
+
+            <div class="email-notice-box" style="border-color: #b2f2bb; background-color: #ebfbee;">
+                <span class="notice-icon">🎉</span>
+                <p class="notice-text" style="color: #2b8a3e;">
+                    <strong>ご注文手続きの完了</strong><br>
+                    カート情報のクリア、クーポン値引きの適用、および注文履歴の保存が正常に完了いたしました。
+                </p>
+            </div>
+        </div>
+
+        <h2 class="navigation-title">引き続きKOTANをお楽しみください</h2>
+        <div class="navigation-grid">
+            <a th:href="@{/products}" class="nav-card shop-card">
+                <span class="nav-icon">🛍️</span>
+                <span class="nav-name">SHOP</span>
+            </a>
+            <a th:href="@{/}" class="nav-card room-card">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-name">ROOM</span>
+            </a>
+            <a th:href="@{/garden}" class="nav-card garden-card">
+                <span class="nav-icon">🌻</span>
+                <span class="nav-name">GARDEN</span>
+            </a>
+            <a th:href="@{/aquarium}" class="nav-card aquarium-card">
+                <span class="nav-icon">🐟</span>
+                <span class="nav-name">AQUARIUM</span>
+            </a>
+            <a th:href="@{/farm}" class="nav-card farm-card">
+                <span class="nav-icon">🌾</span>
+                <span class="nav-name">FARM</span>
+            </a>
+        </div>
+    </main>
+
+    <div th:replace="~{layout/_footer :: footer}"></div>
+</body>
+</html>

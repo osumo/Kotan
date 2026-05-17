@@ -21,6 +21,9 @@ CREATE TABLE users (
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     display_name VARCHAR(100),
+    postal_code VARCHAR(10),
+    address VARCHAR(255),
+    phone_number VARCHAR(20),
     total_spent INTEGER DEFAULT 0,
     converted_spent INTEGER DEFAULT 0,
     created_at TIMESTAMP DEFAULT NOW()
@@ -121,7 +124,7 @@ CREATE TABLE orders (
 CREATE TABLE applied_coupons (
     id SERIAL PRIMARY KEY,
     order_id INTEGER REFERENCES orders(id),
-    user_coupon_id INTEGER REFERENCES user_coupons(id)
+    coupon_id INTEGER REFERENCES coupons(id)
 );
 
 CREATE TABLE order_items (

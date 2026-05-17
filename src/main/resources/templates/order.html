@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ご注文手続き - KOTAN</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/order.css}">
+</head>
+<body>
+    <div th:replace="~{layout/_header :: header}"></div>
+
+    <main class="container">
+        <h1 class="title">ご注文手続き</h1>
+
+        <form th:action="@{/order}" method="post" id="orderForm" class="order-layout">
+            <!-- Left Column: Input and options -->
+            <div class="left-column">
+                <!-- Shipping Address Card -->
+                <div class="glass-card">
+                    <h2 class="card-title">📍 お届け先住所</h2>
+                    <div class="form-group">
+                        <label for="postalCode">郵便番号 <span class="required">必須</span></label>
+                        <input type="text" id="postalCode" name="postalCode" th:value="${user.postalCode}" placeholder="123-4567" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">住所 <span class="required">必須</span></label>
+                        <input type="text" id="address" name="address" th:value="${user.address}" placeholder="東京都千代田区千代田1-1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneNumber">電話番号 <span class="required">必須</span></label>
+                        <input type="tel" id="phoneNumber" name="phoneNumber" th:value="${user.phoneNumber}" placeholder="090-1234-5678" required>
+                    </div>
+                    <div class="form-checkbox">
+                        <input type="checkbox" id="saveAddress" name="saveAddress" value="true" checked>
+                        <label for="saveAddress">この住所をアカウントのデフォルトお届け先として保存する</label>
+                    </div>
+                </div>
+
+                <!-- Payment Method Card -->
+                <div class="glass-card">
+                    <h2 class="card-title">💳 お支払い方法</h2>
+                    <div class="payment-method-container">
+                        <div class="payment-option selected">
+                            <input type="radio" id="payEmail" name="paymentMethod" value="EMAIL" checked>
+                            <label for="payEmail">
+                                <span class="method-name">✉️ メールでのお手続き (銀行振込)</span>
+                                <span class="method-desc">ご注文の確定後、詳細な振込手順と振込口座番号を記載した自動メールが送信されます。その案内に従ってご入金ください。</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coupon Selection Card -->
+                <div class="glass-card">
+                    <h2 class="card-title">🎟️ クーポンの利用</h2>
+                    <div class="form-group">
+                        <label for="userCouponSelect">ご利用可能なクーポン</label>
+                        <select id="userCouponSelect" name="userCouponId">
+                            <option value="-1" data-rate="0" data-min="0">クーポンを利用しない</option>
+                            <option th:each="uc : ${userCoupons}" 
+                                    th:value="${uc.id}" 
+                                    th:data-rate="${uc.discountRate}" 
+                                    th:data-min="${uc.minAmount}"
+                                    th:text="${uc.name} + ' (' + ${uc.discountRate} + '% OFF - 最低適用金額: ' + ${uc.minAmount} + '円)'">
+                                クーポン
+                            </option>
+                        </select>
+                        <p class="coupon-alert" id="couponAlert"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Sticky order summary -->
+            <div class="right-column">
+                <div class="glass-card summary-card">
+                    <h2 class="card-title">🛒 注文内容</h2>
+                    <div class="item-list">
+                        <div th:each="item : ${cart.items}" class="item-row">
+                            <img th:src="${item.imageUrl}" class="item-image" alt="商品画像">
+                            <div class="item-details">
+                                <span class="item-name" th:text="${item.name}">商品名</span>
+                                <span class="item-qty-price" th:text="${item.quantity} + '個 × ' + ${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')} + '円'">1個 x 100円</span>
+                            </div>
+                            <span class="item-subtotal" th:text="${#numbers.formatDecimal(item.subtotal, 0, 'COMMA', 0, 'POINT')} + '円'">100円</span>
+                        </div>
+                    </div>
+
+                    <div class="price-breakdown">
+                        <div class="price-row">
+                            <span>商品合計</span>
+                            <span id="baseTotal" th:data-price="${cart.totalPrice}" th:text="${#numbers.formatDecimal(cart.totalPrice, 0, 'COMMA', 0, 'POINT')} + '円'">0円</span>
+                        </div>
+                        <div class="price-row discount" id="discountRow" style="display: none;">
+                            <span>クーポン割引</span>
+                            <span id="discountPrice">-0円</span>
+                        </div>
+                        <div class="price-row">
+                            <span>送料</span>
+                            <span class="free-shipping">無料</span>
+                        </div>
+                        <hr class="divider">
+                        <div class="price-row total-price-row">
+                            <span>お支払い合計</span>
+                            <span id="finalTotal" th:text="${#numbers.formatDecimal(cart.totalPrice, 0, 'COMMA', 0, 'POINT')} + '円'">0円</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary btn-submit">注文を確定する</button>
+                    <a th:href="@{/cart}" class="back-link">← カートへ戻る</a>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <div th:replace="~{layout/_footer :: footer}"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const couponSelect = document.getElementById('userCouponSelect');
+            const baseTotalElement = document.getElementById('baseTotal');
+            const discountRow = document.getElementById('discountRow');
+            const discountPriceElement = document.getElementById('discountPrice');
+            const finalTotalElement = document.getElementById('finalTotal');
+            const couponAlert = document.getElementById('couponAlert');
+
+            const baseTotal = parseInt(baseTotalElement.getAttribute('data-price'));
+
+            function updatePrices() {
+                const selectedOption = couponSelect.options[couponSelect.selectedIndex];
+                const discountRate = parseInt(selectedOption.getAttribute('data-rate')) || 0;
+                const minAmount = parseInt(selectedOption.getAttribute('data-min')) || 0;
+
+                if (discountRate > 0) {
+                    if (baseTotal < minAmount) {
+                        couponAlert.style.display = 'block';
+                        couponAlert.textContent = `※このクーポンは合計金額が ${minAmount.toLocaleString()} 円以上の場合にのみ適用できます。`;
+                        discountRow.style.display = 'none';
+                        finalTotalElement.textContent = baseTotal.toLocaleString() + '円';
+                    } else {
+                        couponAlert.style.display = 'none';
+                        const discount = Math.floor(baseTotal * (discountRate / 100));
+                        const finalTotal = Math.max(0, baseTotal - discount);
+
+                        discountRow.style.display = 'flex';
+                        discountPriceElement.textContent = '-' + discount.toLocaleString() + '円';
+                        finalTotalElement.textContent = finalTotal.toLocaleString() + '円';
+                    }
+                } else {
+                    couponAlert.style.display = 'none';
+                    discountRow.style.display = 'none';
+                    finalTotalElement.textContent = baseTotal.toLocaleString() + '円';
+                }
+            }
+
+            couponSelect.addEventListener('change', updatePrices);
+            updatePrices(); // Run on startup
+        });
+    </script>
+</body>
+</html>
