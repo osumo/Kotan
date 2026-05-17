@@ -79,7 +79,7 @@ INSERT INTO orders (user_id, total_price) VALUES
 (2, 12000);
 
 -- 13. applied_coupons
-INSERT INTO applied_coupons (order_id, user_coupon_id) VALUES
+INSERT INTO applied_coupons (order_id, coupon_id) VALUES
 (1, 1);
 
 -- 14. order_items
